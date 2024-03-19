@@ -13,6 +13,14 @@ def shomal():
         'title': 'koskesh'
     }
 
+
+@app.route('/api/generate_zones', methods=['POST'])
+def generate_zones():
+    return 'Zone generated successfully!'
+
+
+
+
 if __name__ == '__main__':
     app.run()
 
