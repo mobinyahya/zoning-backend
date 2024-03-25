@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFUSD Zoning Districts</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    
+<h1>SFUSD Zoning Districts</h1>
+
+<div class="main-container">
+    <div class="content-container">
+        
+        <div class="slider-container">
+            <label for="zoneSlider" class="zone-label"># of Zones:</label>
+            <input type="range" min="0" max="4" value="0" class="slider" id="zoneSlider" step="1">
+            <span id="zoneValue">2</span>
+        </div>
+        
+        <div class="slider-container">
+            <label for="shortageSlider" class="zone-label">% of shortage in each zone:</label>
+            <input type="range" min="0" max="4" value="0" class="slider" id="shortageSlider" step="1">
+            <span id="shortageValue">5</span>
+        </div>
+        
+        <div class="slider-container">
+            <label for="deviationSlider" class="zone-label">% of socioeconomic deviation:</label>
+            <input type="range" min="0" max="4" value="0" class="slider" id="deviationSlider" step="1">
+            <span id="deviationValue">1</span>
+        </div>        
+        
+        <div class="input-group">
+            <label for="additionalPreferences">Give us your additional preferences:</label>
+            <input type="text" id="additionalPreferences" name="additionalPreferences" placeholder="Type here...">
+        </div>
+
+        <div class="button-container">
+            <button id="generateZones">Generate Zones</button>
+        </div>
+    </div>
+
+    <div class="map-container">
+        <p>Zone Map will be displayed here.</p>
+    </div>
+</div>
+
+<script src="static/script.js"></script>
+</body>
+</html>

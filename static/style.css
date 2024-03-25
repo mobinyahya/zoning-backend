@@ -1,0 +1,111 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #F0F2F5;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1 {
+    color: #005A9C;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #005A9C;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 80%; 
+}
+
+.sliders-container {
+    flex: 1; /* Take up all available space */
+    margin-right: 20px; /* Space between sliders and map */
+}
+
+.map-container {
+    flex: 1; 
+    height: 600px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+}
+
+.slider-container, .input-group, .button-container {
+    margin: 20px auto;
+    text-align: center;
+    width: 80%;
+}
+.sliders-container, .map-container {
+    width: 48%;
+}
+.slider-container {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.zone-label, .input-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #444;
+}
+
+.slider, .input-group input[type="text"] {
+    width: calc(100% - 22px); 
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.sliderValue {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.button-container button {
+    padding: 10px 25px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .sliders-container, .map-container {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .map-container {
+        height: 400px; 
+    }
+}
