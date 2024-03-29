@@ -1,0 +1,50 @@
+Existing Variables:
+
+ - $Z$: Set of zones.
+ - $U$: Set of geographic units.
+ - $N$: Total number of students.
+
+ - $n_u$ number of students in unit $u$.
+ - $q_u$ number of seats in unit $u$.
+ - $f_u$: Sum of socio-economic score of students in unit $u$.
+ - $R_u^k$: Number of students of race $k$ in unit $u$, $\forall u \in U, k \in K$, where $K := \left \{ \text{White, Asian, Latino} \right \}$
+ - $x_{u,z}$: A binary decision variable indicating whether unit $u$ is part of zone $z$ or not.   $\forall u \in U, z \in Z$.
+ - $N(u)$: Neighboring units to unit $u$’s.  $\forall u \in U$.
+ - $\text{centroid}(z)$: A predefined centroid for zone $z$.
+ - $Sch_u$: Number of schools in unit $u$,  $\forall u \in U$
+ - Make sure any new variable that is defined, does not have "_" in the middle of the name. For example:
+    - Unacceptable: math_quality_u
+    - Acceptable: MathQuality_u
+    - Unacceptable: high_frl_school_u
+    - Acceptable: HighFrlSchool_u
+
+
+ Constraints:
+
+ - Contiguity:
+    - Description: Make sure all zone are contiguous.
+    - Formula:  $x_{u,z} \leq \sum_{v: v \in N(u), d_{v,z} \leq d_{u,\text{centroid}(z)}} x_{v,z}  \;\;\;\;\; \forall u \in U, z \in Z$
+
+ - Shortage:
+      Makes sure no zone has a shortage more than 15%, where shortage is
+      percentage of students (GE students) in the zone, that don't get any seat (from GE capacities)
+     $0.15 \cdot \sum_{u \in U} n_u x_{u,z}  \geq  |\sum_{u \in U} (n_u - q_u) x_{u,z}|   \;\;\;\;\;    \forall z \in Z$
+
+- FRL Balance:
+    - Description: Make sure students of low socioeconomic status groups are fairly distributed among zones.
+     Our only metric to measure socioeconomic status, is FRL, which is the students eligibility for Free or Reduced Price Lunch.
+     make sure the total FRL for students in each zone, is within an additive 15% of average FRL over zones.
+    - Formula: $\sum_{u \in U} f_u x_{u,z}  \geq (\frac{\sum_{u \in U} f_u}{N} - 0.15) \cdot \sum_{u \in U} n_u x_{u,z}  \;\;\;\;\;   \forall z \in Z$
+
+- Racial Balance:
+    - Description: Make sure students of racial groups are fairly distributed among zones. For specific racial minority,
+     make sure the percentage of students in each zone, is within an additive 15% of percentage of total students of that race.
+    - Formula: $\sum_{u \in U} R_u^k x_{u,z}  \geq (\frac{R^k}{N} - 0.15) \cdot \sum_{u \in U} n_u x_{u,z}   \;\;\;\;\;   \forall z \in Z, k \in K$
+
+- School Count Balance:
+   - Description: makes sure all zones have almost similar number of schools. Compute the average number of schools per zone,
+    by computing the total number of schools in the city and dividing it by the number of zones. Next, add a constraint
+     to make sure the number of schools in each zone is within average number of schools per zone + or - 1.
+   - Formula:  $1 \geq |\sum_{u \in U} \frac{Sch_u}{|Z|} - \sum_{u \in U} Sch_u x_{u,z}|  \;\;\;\;\;  \forall z \in Z$
+
+

@@ -1,0 +1,27 @@
+{
+  "Function_Code": '''
+    def requested_function(self, score_dev=0.2):
+        if not (1 > score_dev > -1):
+            return
+        
+        math_scores = self.units_data["math_score"].fillna(value=0)
+        school_average = sum(math_scores) / sum(self.schools)
+        
+        for z in range(self.Z):
+            zone_sum = gp.quicksum(
+                [math_scores[v] * self.x[v, z] for v in self.valid_units_per_zone[z]]
+            )
+            zone_schools = gp.quicksum(
+                [self.schools[v] * self.x[v, z] for v in self.valid_units_per_zone[z]]
+            )
+            
+            self.m.addConstr(zone_sum >= (1 - score_dev) * school_average * zone_schools)
+            self.m.addConstr(zone_sum <= (1 + score_dev) * school_average * zone_schools)
+    ''',
+  "Latex_Formula": {
+    "Variables": {
+      "MathScore_u": "Sum of math scores for all schools in unit $u$, $\\forall u \\in U$"
+    },
+    "Formula": "\\left(1 - 0.2\\right) \\cdot \\frac{\\sum_{u \\in U} MathScore_u}{\\sum_{u \\in U} Sch_u} \\cdot \\sum_{u \\in U} Sch_u \\cdot x_{u,z} \\leq \\sum_{u \\in U} MathScore_u \\cdot x_{u,z} \\leq \\left(1 + 0.2\\right) \\cdot \\frac{\\sum_{u \\in U} MathScore_u}{\\sum_{u \\in U} Sch_u} \\cdot \\sum_{u \\in U} Sch_u \\cdot x_{u,z} \\quad \\forall z \\in Z"
+  }
+}

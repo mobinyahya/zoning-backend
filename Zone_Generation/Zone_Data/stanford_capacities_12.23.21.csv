@@ -1,0 +1,163 @@
+Grade,PathwayCode,PathwayName,SchNum,SchoolName,Scenario_A_Capacity,Scenario_B_Capacity,Scenario_C_Capacity,Scenario_D_Capacity
+K,SA,SDC - Mod/Severe Autism Focus,413,Alamo ES,4,4,4,4
+K,GE,Gen Ed,413,Alamo ES,64,64,64,64
+K,MS,SDC - Moderate to Severe,420,Alvarado ES,3,3,3,3
+K,SE,Spanish Immersion (Non-Native),420,Alvarado ES,18,18,18,18
+K,SN,Spanish Immersion (Spanish Speakers),420,Alvarado ES,26,26,26,26
+K,GE,Gen Ed,420,Alvarado ES,42,42,42,42
+K,GE,Gen Ed,435,Argonne ES,64,64,64,64
+K,GE,Gen Ed,456,Bryant ES,22,22,22,22
+K,SB,Spanish Biliteracy,456,Bryant ES,22,22,22,22
+K,MM,SDC - Mild to Moderate,618,Buena Vista Horace Mann K-8,4,2,4,4
+K,SE,Spanish Immersion (Non-Native),618,Buena Vista Horace Mann K-8,27,27,27,27
+K,SN,Spanish Immersion (Spanish Speakers),618,Buena Vista Horace Mann K-8,39,39,39,39
+K,FB,Filipino FLES,449,Carmichael (Bessie) K-8,22,11,22,22
+K,GE,Gen Ed,449,Carmichael (Bessie) K-8,44,44,44,44
+K,GE,Gen Ed,625,Carver (Dr George W) ES,66,22,66,66
+K,TC,SDC - Total Communication,603,Chavez (Cesar) ES,4,4,4,4
+K,GE,Gen Ed,603,Chavez (Cesar) ES,44,22,44,44
+K,SB,Spanish Biliteracy,603,Chavez (Cesar) ES,44,44,44,44
+K,CB,Cantonese Biliteracy,872,Chin (John Yehall) ES,0,22,0,0
+K,GE,Gen Ed,872,Chin (John Yehall) ES,22,22,0,22
+K,CE,Cantonese Immersion (All English),509,Chinese Immersion School at DeAvila ES,27,27,27,27
+K,CN,Cantonese Immersion (Cantonese Speakers),509,Chinese Immersion School at DeAvila ES,39,39,39,39
+K,MM,SDC - Mild to Moderate,478,Clarendon ES,3,5,3,3
+K,JN,Japanese Bilingual Bicultural Program - Japanese Cohort,478,Clarendon ES,10,10,10,10
+K,JE,Japanese Bilingual Bicultural Program - English Cohort,478,Clarendon ES,34,34,34,34
+K,GE,Gen Ed,478,Clarendon ES,42,42,42,42
+K,GE,Gen Ed,481,Cleveland ES,22,22,22,22
+K,SB,Spanish Biliteracy,481,Cleveland ES,22,40,22,22
+K,GE,Gen Ed,525,Cobb (Dr William L) ES,22,22,0,22
+K,GE,Gen Ed,507,Drew (Dr Charles) College Preparatory Academy ES,66,22,66,66
+K,GE,Gen Ed,521,El Dorado ES,44,22,44,44
+K,AF,SDC – Mild/Mod Autism Focus,521,El Dorado ES,3,3,3,3
+K,ED,SDC - Emotionally Disturbed,539,Feinstein (Dianne) ES,3,2,3,3
+K,GE,Gen Ed,539,Feinstein (Dianne) ES,88,64,88,88
+K,SE,Spanish Immersion (Non-Native),680,Flynn (Leonard R) ES,22,22,22,22
+K,SN,Spanish Immersion (Spanish Speakers),680,Flynn (Leonard R) ES,22,22,22,22
+K,GE,Gen Ed,680,Flynn (Leonard R) ES,44,33,44,44
+K,AF,SDC – Mild/Mod Autism Focus,562,Garfield ES,5,3,5,5
+K,CE,Cantonese Immersion (All English),562,Garfield ES,9,9,9,9
+K,CN,Cantonese Immersion (Cantonese Speakers),562,Garfield ES,13,13,13,13
+K,GE,Gen Ed,562,Garfield ES,22,22,22,22
+K,SA,SDC - Mod/Severe Autism Focus,575,Glen Park ES,4,3,4,4
+K,SB,Spanish Biliteracy,575,Glen Park ES,22,22,22,22
+K,GE,Gen Ed,575,Glen Park ES,22,42,22,22
+K,SA,SDC - Mod/Severe Autism Focus,589,Grattan ES,4,5,4,4
+K,GE,Gen Ed,589,Grattan ES,64,64,64,64
+K,GE,Gen Ed,593,Guadalupe ES,22,22,22,22
+K,SB,Spanish Biliteracy,593,Guadalupe ES,22,22,22,22
+K,SE,Spanish Immersion (Non-Native),453,Harte (Bret) ES,9,9,9,9
+K,SN,Spanish Immersion (Spanish Speakers),453,Harte (Bret) ES,13,13,13,13
+K,GE,Gen Ed,453,Harte (Bret) ES,66,22,66,66
+K,CB,Cantonese Biliteracy,614,Hillcrest ES,0,0,0,0
+K,MM,SDC - Mild to Moderate,614,Hillcrest ES,3,3,3,3
+K,SB,Spanish Biliteracy,614,Hillcrest ES,22,22,22,22
+K,GE,Gen Ed,614,Hillcrest ES,64,42,64,64
+K,SE,Spanish Immersion (Non-Native),537,Huerta (Dolores) ES,32,32,32,32
+K,SN,Spanish Immersion (Spanish Speakers),537,Huerta (Dolores) ES,34,34,34,34
+K,AF,SDC – Mild/Mod Autism Focus,644,Jefferson ES,5,5,5,5
+K,GE,Gen Ed,644,Jefferson ES,66,86,66,66
+K,GE,Gen Ed,910,McLaren (John) ES,0,0,0,44
+K,MS,SDC - Moderate to Severe,544,Key (Francis Scott) ES,4,5,4,4
+K,GE,Gen Ed,544,Key (Francis Scott) ES,86,86,86,86
+K,SA,SDC - Mod/Severe Autism Focus,838,King (Thomas Starr) ES,7,7,7,7
+K,ME,Mandarin Immersion (Non-Native),838,King (Thomas Starr) ES,18,18,18,18
+K,GE,Gen Ed,838,King (Thomas Starr) ES,20,20,20,20
+K,MN,Mandarin Immersion (Mandarin Speakers),838,King (Thomas Starr) ES,26,26,26,26
+K,AO,SDC - Auditory/Oral,664,Lafayette ES,5,5,5,5
+K,GE,Gen Ed,664,Lafayette ES,86,86,86,86
+K,AF,SDC – Mild/Mod Autism Focus,670,Lakeshore ES,1,1,1,1
+K,GE,Gen Ed,670,Lakeshore ES,64,64,64,64
+K,GE,Gen Ed,490,Lau (Gordon J) ES,44,44,44,44
+K,CB,Cantonese Biliteracy,490,Lau (Gordon J) ES,44,66,44,44
+K,MS,SDC - Moderate to Severe,676,Lawton K-8,3,3,3,3
+K,GE,Gen Ed,676,Lawton K-8,44,64,44,44
+K,NC,Chinese Newcomer,476,Lee (Edwin and Anita) Newcomer ES,18,3,18,18
+K,GE,Gen Ed,911,Havard (Leola) ES,0,0,0,44
+K,KN,Korean Immersion (Korean Speakers),479,Lilienthal (Claire) K-8,11,11,11,11
+K,KE,Korean Immersion (Non-Native),479,Lilienthal (Claire) K-8,11,13,11,11
+K,GE,Gen Ed,479,Lilienthal (Claire) K-8,44,64,44,44
+K,MM,SDC - Mild to Moderate,691,Longfellow ES,4,0,4,4
+K,FB,Filipino FLES,691,Longfellow ES,22,11,22,22
+K,SB,Spanish Biliteracy,691,Longfellow ES,22,22,22,22
+K,GE,Gen Ed,691,Longfellow ES,42,42,42,42
+K,GE,Gen Ed,830,Malcolm X Academy ES,44,22,44,44
+K,SE,Spanish Immersion (Non-Native),714,Marshall ES,11,18,11,11
+K,SN,Spanish Immersion (Spanish Speakers),714,Marshall ES,11,26,11,11
+K,GE,Gen Ed,549,McCoppin (Frank) ES,44,44,44,44
+K,GE,Gen Ed,718,McKinley ES,44,44,44,44
+K,GE,Gen Ed,505,Milk (Harvey) Civil Right ES,22,22,0,22
+K,AF,SDC – Mild/Mod Autism Focus,722,Miraloma ES,3,5,3,3
+K,GE,Gen Ed,722,Miraloma ES,64,64,64,64
+K,GE,Gen Ed,909,Mission Bay ES,66,0,66,66
+K,NS,Spanish Newcomer,724,Mission Education Center ES,22,11,0,22
+K,SE,Spanish Immersion (Non-Native),729,Monroe ES,11,18,11,11
+K,CB,Cantonese Biliteracy,729,Monroe ES,22,22,22,22
+K,GE,Gen Ed,729,Monroe ES,22,22,22,22
+K,SN,Spanish Immersion (Spanish Speakers),729,Monroe ES,11,26,11,11
+K,CB,Cantonese Biliteracy,723,Moscone (George R) ES,22,22,22,22
+K,GE,Gen Ed,723,Moscone (George R) ES,22,22,22,22
+K,SB,Spanish Biliteracy,723,Moscone (George R) ES,0,22,0,0
+K,GE,Gen Ed,650,Muir (John) ES,66,22,66,66
+K,SB,Spanish Biliteracy,650,Muir (John) ES,22,22,22,22
+K,GE,Gen Ed,735,New Traditions ES,22,44,22,22
+K,ME,Mandarin Immersion (Non-Native),746,Ortega (Jose) ES,9,9,9,9
+K,MN,Mandarin Immersion (Mandarin Speakers),746,Ortega (Jose) ES,13,13,13,13
+K,GE,Gen Ed,746,Ortega (Jose) ES,22,44,22,22
+K,CB,Cantonese Biliteracy,638,Parker (Jean) ES,22,22,22,22
+K,GE,Gen Ed,638,Parker (Jean) ES,22,22,22,22
+K,AF,SDC – Mild/Mod Autism Focus,786,Parks (Rosa) ES,4,3,4,4
+K,JN,Japanese Bilingual Bicultural Program - Japanese Cohort,786,Parks (Rosa) ES,5,5,5,5
+K,GE,Gen Ed,786,Parks (Rosa) ES,22,22,22,22
+K,JE,Japanese Bilingual Bicultural Program - English Cohort,786,Parks (Rosa) ES,39,39,39,39
+K,MM,SDC - Mild to Moderate,569,Peabody (George) ES,3,0,0,3
+K,GE,Gen Ed,569,Peabody (George) ES,22,42,0,22
+K,GE,Gen Ed,790,Redding ES,44,44,44,44
+K,MM,SDC - Mild to Moderate,760,Revere (Paul) K-8,4,1,4,4
+K,SE,Spanish Immersion (Non-Native),760,Revere (Paul) K-8,18,18,18,18
+K,GE,Gen Ed,760,Revere (Paul) K-8,22,22,22,22
+K,SN,Spanish Immersion (Spanish Speakers),760,Revere (Paul) K-8,26,26,26,26
+K,GE,Gen Ed,796,Rooftop K-8,44,66,44,44
+K,GE,Gen Ed,816,Sanchez ES,66,22,66,66
+K,SB,Spanish Biliteracy,816,Sanchez ES,22,22,22,22
+K,GE,Gen Ed,656,Serra (Junipero) ES,22,22,22,22
+K,SB,Spanish Biliteracy,656,Serra (Junipero) ES,22,22,22,22
+K,GE,Gen Ed,493,SF Community K-8,22,33,22,22
+K,GE,Gen Ed,814,SF Public Montessori ES,44,28,44,44
+K,GE,Gen Ed,820,Sheridan ES,44,33,44,44
+K,AF,SDC – Mild/Mod Autism Focus,823,Sherman ES,5,5,5,5
+K,GE,Gen Ed,823,Sherman ES,88,44,88,88
+K,GE,Gen Ed,488,Sloat (Commodore) ES,44,66,44,44
+K,SB,Spanish Biliteracy,834,Spring Valley Science ES,22,13,22,22
+K,CB,Cantonese Biliteracy,834,Spring Valley Science ES,0,19,0,0
+K,GE,Gen Ed,834,Spring Valley Science ES,44,22,44,44
+K,MM,SDC - Mild to Moderate,782,Stevenson (Robert Louis) ES,4,4,4,4
+K,GE,Gen Ed,782,Stevenson (Robert Louis) ES,64,64,64,64
+K,MS,SDC - Moderate to Severe,842,Sunnyside ES,3,0,3,3
+K,GE,Gen Ed,842,Sunnyside ES,44,64,44,44
+K,SA,SDC - Mod/Severe Autism Focus,750,Sunset ES,7,7,7,7
+K,GE,Gen Ed,750,Sunset ES,64,64,64,64
+K,CB,Cantonese Biliteracy,848,Sutro ES,22,22,22,22
+K,GE,Gen Ed,848,Sutro ES,22,22,22,22
+K,AF,SDC – Mild/Mod Autism Focus,513,Taylor (Edward R) ES,3,4,3,3
+K,SB,Spanish Biliteracy,513,Taylor (Edward R) ES,0,22,0,0
+K,GE,Gen Ed,513,Taylor (Edward R) ES,64,42,64,64
+K,CB,Cantonese Biliteracy,513,Taylor (Edward R) ES,22,44,22,22
+K,GE,Gen Ed,859,Tenderloin Community ES,66,42,66,66
+K,GE,Gen Ed,912,Treasure Island ES,0,0,0,44
+K,CB,Cantonese Biliteracy,862,Ulloa ES,22,22,22,22
+K,GE,Gen Ed,862,Ulloa ES,66,66,66,66
+K,CB,Cantonese Biliteracy,867,Visitacion Valley ES,22,11,22,22
+K,GE,Gen Ed,867,Visitacion Valley ES,44,44,44,44
+K,GE,Gen Ed,497,Webster (Daniel) ES,22,22,22,22
+K,SE,Spanish Immersion (Non-Native),497,Webster (Daniel) ES,11,22,11,11
+K,SN,Spanish Immersion (Spanish Speakers),497,Webster (Daniel) ES,11,22,11,11
+K,CE,Cantonese Immersion (All English),876,West Portal ES,21,14,21,21
+K,CN,Cantonese Immersion (Cantonese Speakers),876,West Portal ES,21,19,21,21
+K,GE,Gen Ed,876,West Portal ES,42,66,42,42
+K,SA,SDC - Mod/Severe Autism Focus,801,Wo (Yick) ES,4,2,4,4
+K,GE,Gen Ed,801,Wo (Yick) ES,22,42,22,22
+K,CT,Cantonese Immersion (All others),485,Yu (Alice Fong) K-8,22,22,22,22
+K,CE,Cantonese Immersion (All English),485,Yu (Alice Fong) K-8,22,44,22,22
+K,GE,Gen Ed,999,Mission Bay ES,66,66,66,66

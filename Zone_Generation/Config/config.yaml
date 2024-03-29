@@ -1,0 +1,24 @@
+
+centroids_type: None
+
+frl_dev: 1
+racial_dev: 1
+
+boundary_threshold: .05
+shortage: 0.3 # this is in percentage
+overage: .inf # this is in percentage
+all_cap_shortage: .inf # this is in percentage
+#max_distance: .inf # best valid value for 59 zines: 1.272
+population_dev: .inf
+path: "Figures/"
+#path: "Zone_Generation/Figures/"
+request_constraint: "Write a function in python to make sure the average school quality across zones 
+is within 20% deviation. Use Math Score at school level to compute school quality."
+
+years: [14, 15, 16, 17, 18, 21, 22]
+population_type: "GE"
+drop_optout: True
+capacity_scenario: "A"
+new_schools: True
+include_k8: False
+level: "attendance_area"  # 'Block', 'BlockGroup' or 'attendance_area'
