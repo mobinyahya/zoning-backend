@@ -117,7 +117,7 @@ class Requests_Handler(object):
 if __name__ == "__main__":
     user_inputs = {}
     user_inputs["shortage"] = 0.25
-    user_inputs["number_of_zones"] = 10
+    user_inputs["number_of_zones"] = 4
     # user_inputs["request_constraint"] = ("Write a function in python to make sure the average school"
     #                                   " quality across zones is within 20% deviation. Use Math"
     #                                   "Score at school level to compute school quality.")
