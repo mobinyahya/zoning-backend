@@ -78,6 +78,7 @@ class DesignZones:
         student_stats = self._aggregate_student_data_to_area(self.student_df)
         school_stats = self._aggregate_school_data_to_area(self.school_df)
 
+
         self.units_data = student_stats.merge(school_stats, how='outer', on=self.level)
 
         self._load_auxilariy_areas()
@@ -99,7 +100,7 @@ class DesignZones:
         #
         # student_stats = mean_students.merge(sum_students, how="left", on=self.level)
         student_stats = student_df.groupby(self.level, as_index=False).sum()
-        student_stats = student_stats[AREA_COLS + [self.level]]
+        student_stats = student_stats[AREA_COLS + [self.level] ]
 
         for col in student_stats.columns:
             if col not in BUILDING_BLOCKS:
@@ -256,13 +257,12 @@ class DesignZones:
         IP.m.update()  # Update the model
         print(f"Total number of dz.m variables: {IP.m.numVars}")
         print(f"Total number of dz.m constraints: {IP.m.numConstrs}")
+        exit()
         self.filename = ""
         self.zone_dict = {}
 
         try:
-            IP.m.Params.TimeLimit = 10000
             IP.m.optimize()
-
             zone_lists = []
             for z in range(0, self.Z):
                 zone = []

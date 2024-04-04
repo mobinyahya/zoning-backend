@@ -176,3 +176,15 @@ class Integer_Program(Integer_Program_Abstract):
                 [self.x[v, z] * top_schools[v] for v in self.valid_units_per_zone[z]]
             )
             self.m.addConstr(topz >= 0.8)
+
+    def requested_function(self):
+        district_ratio = sum(self.units_data["Ethnicity_Hispanic/Latinx"]) / float(self.N)
+        for z in range(self.Z):
+            zone_sum = gp.quicksum(
+                [self.units_data["Ethnicity_Hispanic/Latinx"][v] * self.x[v, z] for v in self.valid_units_per_zone[z]]
+            )
+            district_students = gp.quicksum(
+                [self.studentsInArea[v] * self.x[v, z] for v in self.valid_units_per_zone[z]]
+            )
+            self.m.addConstr(zone_sum >= (0.8 * district_ratio) * district_students)
+            self.m.addConstr(zone_sum <= (1.2 * district_ratio) * district_students)

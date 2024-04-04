@@ -109,6 +109,8 @@ class Integer_Program_Abstract(object):
             self.valid_zones_per_unit[u].append(z)
 
         self.m = gp.Model("Zone model")
+        self.m.Params.MIPGap = 0.03
+        self.m.Params.TimeLimit = 300
 
         # Variable self.x[u,z]: is a binary variable. It indicates
         # whether unit with index u is assigned to zone z or not.
@@ -251,14 +253,15 @@ class Integer_Program_Abstract(object):
             zone_sum = gp.quicksum(
                 [self.units_data["all_prog_students"][v] * self.x[v, z] for v in self.valid_units_per_zone[z]])
 
-            self.m.addConstr(zone_sum >= (1 - population_dev) * average_population, name= "Population LB")
-            self.m.addConstr(zone_sum <= (1 + population_dev) * average_population, name= "Population UB")
+            self.m.addConstr(zone_sum >= (1 - population_dev) * average_population)
+            self.m.addConstr(zone_sum <= (1 + population_dev) * average_population)
 
 
-    # Make sure students of racial groups are fairly distributed among zones.
-    # For specific racial minority, make sure the percentage of students in each zone, is within an additive
+    # Make sure students with ethnicities "Black or African American",  and students with ethnicities "Asian"
+    #  are fairly distributed among zones: make sure the percentage of students in each zone, is within an additive
     #  race_dev% of percentage of total students of that race.
     def _add_racial_constraint(self, race_dev=1):
+        ETHNICITY_COLS = ["Ethnicity_Black_or_African_American", "Ethnicity_Asian"]
         for race in ETHNICITY_COLS:
             race_ratio = sum(self.units_data[race]) / float(self.N)
 
@@ -269,8 +272,8 @@ class Integer_Program_Abstract(object):
                 district_students = gp.quicksum(
                     [self.studentsInArea[v] * self.x[v, z] for v in self.valid_units_per_zone[z]]
                 )
-                self.m.addConstr(zone_sum >= (race_ratio - race_dev) * district_students, name= str(race) + " LB")
-                self.m.addConstr(zone_sum <= (race_ratio + race_dev) * district_students, name= str(race) + " UB")
+                self.m.addConstr(zone_sum >= (race_ratio - race_dev) * district_students)
+                self.m.addConstr(zone_sum <= (race_ratio + race_dev) * district_students)
 
 
     # Make sure students of low socioeconomic status groups are fairly distributed among zones.
@@ -286,9 +289,8 @@ class Integer_Program_Abstract(object):
             district_students = gp.quicksum(
                 [self.studentsInArea[v] * self.x[v, z] for v in self.valid_units_per_zone[z]]
             )
-            self.m.addConstr(zone_sum >= (self.F - frl_dev) * district_students, name="FRL LB")
-            self.m.addConstr(zone_sum <= (self.F + frl_dev) * district_students, name="FRL UB")
-
+            self.m.addConstr(zone_sum >= (self.F - frl_dev) * district_students)
+            self.m.addConstr(zone_sum <= (self.F + frl_dev) * district_students)
 
 
 
@@ -304,9 +306,8 @@ class Integer_Program_Abstract(object):
                 [self.studentsInArea[v] * self.x[v, z] for v in self.valid_units_per_zone[z]]
             )
 
-            self.m.addConstr(zone_sum >= (district_average - aalpi_dev) * district_students, name="AALPI LB")
-            self.m.addConstr(zone_sum <= (district_average  + aalpi_dev) * district_students, name="AALPI UB")
-
+            self.m.addConstr(zone_sum >= (district_average - aalpi_dev) * district_students)
+            self.m.addConstr(zone_sum <= (district_average  + aalpi_dev) * district_students)
 
     # ---------------------------------------------------------------------------
     # ---------------------------------------------------------------------------

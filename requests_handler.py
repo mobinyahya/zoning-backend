@@ -1,4 +1,4 @@
-import yaml, ast
+import yaml, ast, json
 import types, textwrap
 import gurobipy as gp
 from Zone_Generation.design_zones import DesignZones
@@ -23,18 +23,22 @@ class Requests_Handler(object):
             self.solution_status["Latex_Formula"] = ""
             return
 
-        # llm_response = make_api_call(config["request_constraint"])
+        # llm_response = make_api_call(self.config["request_constraint"])
         # with open('LLM/llm_response.txt', 'w') as file:
         #     file.write(llm_response)
+
 
         with open('LLM/llm_response.txt', 'r') as file:
             llm_response = file.read()
 
+
         response_json = ast.literal_eval(llm_response)
         self.solution_status["Function_Code"] = response_json["Function_Code"]
         self.solution_status["Latex_Formula"] = response_json["Latex_Formula"]
-        # print("Function_Code ", solution_status["Function_Code"])
-        # print("Latex_Formula ", solution_status["Function_Code"])
+        # TODO replace // with / before returning the latex
+
+        # divided_string = llm_response.split('"')
+        # self.solution_status["Function_Code"] = divided_string[3]
 
 
     def update_config(self, user_inputs):
@@ -57,24 +61,21 @@ class Requests_Handler(object):
         self.config["level"] = "BlockGroup"
 
         DZ = DesignZones(self.config)
-        zv = ZoneVisualizer(self.config["level"])
+        # zv = ZoneVisualizer(self.config["level"])
 
         load_initial_assignemt(DZ, path=self.config["path"], name=self.name, load_level="attendance_area")
-        zv.zones_from_dict(DZ.zone_dict, centroid_location=DZ.schools_locations)
+        # zv.zones_from_dict(DZ.zone_dict, centroid_location=DZ.schools_locations)
 
         DZ.zd = drop_boundary(DZ, DZ.zone_dict)
-        zv.zones_from_dict(DZ.zone_dict, centroid_location=DZ.centroid_location)
+        # zv.zones_from_dict(DZ.zone_dict, centroid_location=DZ.centroid_location)
 
         DZ.zone_dict = trim_noncontiguity(DZ, DZ.zone_dict)
-        zv.zones_from_dict(DZ.zone_dict, centroid_location=DZ.centroid_location)
+        # zv.zones_from_dict(DZ.zone_dict, centroid_location=DZ.centroid_location)
 
         IP = Integer_Program(DZ)
         IP._initializs_feasiblity_constraints(max_distance=max_distance[self.config["Z"]])
         initialize_preassigned_units(IP, DZ.zone_dict)
         return self.generate_zones(DZ, IP)
-
-
-
 
 
 
@@ -105,10 +106,10 @@ class Requests_Handler(object):
         if solve_success == 1:
             self.solution_status["Solution_Generation"] = True
             DZ.save(path=self.config["path"], name=self.name+"_"+SUFFIX[self.config["level"]])
-            print("Resulting zone dictionary: ", DZ.zone_dict)
+            # print("Resulting zone dictionary: ", DZ.zone_dict)
 
             zv = ZoneVisualizer(self.config["level"])
-            zv.zones_from_dict(DZ.zone_dict, centroid_location=DZ.centroid_location,
+            zv.zones_from_dict(DZ.zone_dict,
                    save_path=self.config["path"] + self.name + "_" + SUFFIX[self.config["level"]])
         else:
             self.solution_status["Solution_Generation"] = False
@@ -124,5 +125,5 @@ if __name__ == "__main__":
     user_inputs["request_constraint"] = ""
     RH = Requests_Handler(user_inputs)
     RH.fetch_llm_response()
-    RH.generate_aa_zones()
-    # RH.generate_bg_zones()
+    # RH.generate_aa_zones()
+    RH.generate_bg_zones()

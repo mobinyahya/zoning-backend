@@ -10,6 +10,7 @@ def Compute_Name(config):
     name = str(config["centroids_type"])
     return name
 
+
 def load_zones_from_file(file_path):
     zone_lists = []
     with open(file_path, 'r', newline='') as file:

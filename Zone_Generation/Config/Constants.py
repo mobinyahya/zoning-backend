@@ -25,21 +25,15 @@ ETHNICITY_DICT = {
     'Two or more races': 'Two or More Races'
 }
 
-ETHNICITY_COLS = [
-    "resolved_ethnicity_American Indian",
-    "resolved_ethnicity_Asian",
-    "resolved_ethnicity_Black or African American",
-    "resolved_ethnicity_Filipino",
-    "resolved_ethnicity_Hispanic/Latinx",
-    "resolved_ethnicity_Pacific Islander",
-    "resolved_ethnicity_Two or More Races",
-    "resolved_ethnicity_White"]
-
 AREA_COLS = [
     'AALPI Score',
     'FRL',
     'ge_students',
-    'all_prog_students'
+    'all_prog_students',
+    "Ethnicity_Asian",
+    "Ethnicity_Black_or_African_American",
+    "Ethnicity_White",
+    "Ethnicity_Hispanic/Latinx",
 ]
 OLD_COLS = [
     "Unnamed: 0",

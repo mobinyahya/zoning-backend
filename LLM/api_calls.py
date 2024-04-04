@@ -27,7 +27,8 @@ def build_prompt(request_constraint):
                 'A': "Definition of the new variable A, in the formula (if any new variables are defined)",
                 'B': "Definition of the new variable B, in the formula (if any new variables are defined)",
             },
-            'Formula': 'Theoretical Latex formula, for the constraint that was requested'
+            'Formula': 'Theoretical Latex formula, for the constraint that was requested. '
+                       'Dont make any changes to the original forumal. Dont use \\'
         }
     }
     output_format = json.dumps(output_format, indent=2)
@@ -131,7 +132,7 @@ def build_prompt(request_constraint):
 
 
 
-    Your output should have the exact following json format.
+    Your output should have the exact following json format, with no additional text besides outside of this format:
     output_format: {output_format}
 
     Here is an Example to learn from: 
@@ -183,41 +184,17 @@ if __name__ == "__main__":
                           "at school level to compute school quality.")
     llm_response = make_api_call(request_constraint)
 
-# llm_response = """
-# {
-#   "Function_Code": '''
-#     def requested_function(self, score_dev=0.2):
-#         if not (1 > score_dev > -1):
-#             return
-#
-#         math_scores = self.units_data["math_score"].fillna(value=0)
-#         school_average = sum(math_scores) / sum(self.schools)
-#
-#         for z in range(self.Z):
-#             zone_sum = gp.quicksum(
-#                 [math_scores[v] * self.x[v, z] for v in self.valid_units_per_zone[z]]
-#             )
-#             zone_schools = gp.quicksum(
-#                 [self.schools[v] * self.x[v, z] for v in self.valid_units_per_zone[z]]
-#             )
-#
-#             self.m.addConstr(zone_sum >= (1 - score_dev) * school_average * zone_schools)
-#             self.m.addConstr(zone_sum <= (1 + score_dev) * school_average * zone_schools)
-#     ''',
-#   "Latex_Formula": {
-#     "Variables": {
-#       "MathScore_u": "Sum of total math score for schools within the census unit $u$",
-#       "MathScoreAvg": "The average math score over all schools"
-#     },
-#     "Formula": "(1 - dev) \\cdot MathScoreAvg \\cdot \\sum_{u \\in U} Sch_u x_{u,z} \\leq \\sum_{u \\in U} MathScore_u x_{u,z} \\leq (1 + dev) \\cdot MathScoreAvg \\cdot \\sum_{u \\in U} Sch_u x_{u,z} \\quad \\forall z \\in Z"
-#   }
-# }
-# """
 
-
-# Function: Write a function in python to make sure:
-# average quality of schools across zones is balanced.
-# Use average color index to measure school quality.
-#
-# Function: Write a function in python to make sure: Fraction of students at the school across all zones that meet
-# grade level standards is about the same, and is within 10% deviation.
+    request_constraint: """
+    Write a function in python to make sure: Fraction of Hispanic students
+    across all zones is balanced, and has maximum 20% deviation across zones."""
+    #
+    # request_constraint: """
+    # Write a function in python to make sure:
+    # average quality of schools across zones is balanced.
+    # Use average color index to measure school quality."""
+    #
+    # request_constraint: """
+    # Write a function in python to make sure: Fraction of students at the school across all zones that meet
+    # grade level standards is about the same, and is within 10% deviation.
+    # """

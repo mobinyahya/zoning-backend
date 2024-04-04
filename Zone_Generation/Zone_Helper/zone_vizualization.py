@@ -120,10 +120,9 @@ class ZoneVisualizer:
         plt.title(title)
 
         # plot centroid locations
-        plt.scatter(centroid_location['lon'], centroid_location['lat'], s=3, c='black', marker='s')
-        for lon, lat, id in zip(centroid_location['lon'], centroid_location['lat'], centroid_location['school_id']):
-            plt.text(lon, lat, id, ha='center', va='center')
-        # plt.scatter(bb['lon'], bb['lat'], s=20, c='red', marker='s')
+        # plt.scatter(centroid_location['lon'], centroid_location['lat'], s=3, c='black', marker='s')
+        # for lon, lat, id in zip(centroid_location['lon'], centroid_location['lat'], centroid_location['school_id']):
+        #     plt.text(lon, lat, id, ha='center', va='center')
 
         # # plot school locations
         # aa = self.sc_merged.loc[self.sc_merged['category']=='Attendance']
