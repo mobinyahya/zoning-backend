@@ -10,7 +10,7 @@ from Zone_Generation.Config.Constants import *
 from LLM.api_calls import make_api_call
 
 
-class Requests_Handler(object):
+class Generate_Request(object):
     def __init__(self, user_inputs):
         self.update_config(user_inputs)
         self.name = Compute_Name(self.config)
@@ -24,11 +24,11 @@ class Requests_Handler(object):
             return
 
         # llm_response = make_api_call(self.config["request_constraint"])
-        # with open('LLM/llm_response.txt', 'w') as file:
+        # with open('LLM/llm_generation_response.txt', 'w') as file:
         #     file.write(llm_response)
 
 
-        with open('LLM/llm_response.txt', 'r') as file:
+        with open('LLM/llm_generation_response.txt', 'r') as file:
             llm_response = file.read()
 
 
@@ -77,8 +77,6 @@ class Requests_Handler(object):
         initialize_preassigned_units(IP, DZ.zone_dict)
         return self.generate_zones(DZ, IP)
 
-
-
     def generate_zones(self, DZ, IP):
         IP._set_objective_model()
         IP._shortage_constraints(shortage=self.config["shortage"], overage=self.config["overage"],
@@ -123,7 +121,7 @@ if __name__ == "__main__":
     #                                   " quality across zones is within 20% deviation. Use Math"
     #                                   "Score at school level to compute school quality.")
     user_inputs["request_constraint"] = ""
-    RH = Requests_Handler(user_inputs)
+    RH = Generate_Request(user_inputs)
     RH.fetch_llm_response()
     # RH.generate_aa_zones()
     RH.generate_bg_zones()

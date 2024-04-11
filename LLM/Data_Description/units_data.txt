@@ -1,16 +1,15 @@
 units_data.columns = {
   "json description":
-          "In our units_data dataframe, each row is a different unit.
+          '''In our units_data dataframe, each row is a different unit.
           You can access information of column X for unit u, as self.units_data[X][u]
           Here is an example:
           Number of General Education students (ge_students) in unit u is: self.units_data["ge_students"][u].
-          Here are the set of columns in self.units_data:",
+          Here are the set of columns in self.units_data:''',
   "FRL": {
     "DataType": "float",
-    "Description": "Number of students, eligible for Free or Reduced Priced Lunch (FRL) in each census unit.
-     The higher FRL, means this census unit is more disadvantaged in terms of socioeconomic status.",
+    "Description": "Number of students, eligible for Free or Reduced Priced Lunch (FRL) in each census unit. The higher FRL, means this census unit is more disadvantaged in terms of socioeconomic status.",
   },
-  "AALPI_Score": {
+  "AALPI Score": {
     "DataType": "float",
     "Description": "Number of historically underserved student for each census unit",
     "Notes": ""
@@ -19,13 +18,17 @@ units_data.columns = {
     "DataType": "float",
     "Values": "Number of GE (General Education) students in each unit",
   },
+  "all_prog_students": {
+    "DataType": "float",
+    "Values": "Total number of students (across all programs including GE, Special Education, etc) in each unit",
+  },
   "Ethnicity_Asian": {
     "DataType": "float",
     "Values": "Number of Asian Ethnicity student each unit. This number will be less than ge_students in the same unit",
   },
   "Ethnicity_Black_or_African_American": {
     "DataType": "float",
-    "Values": "Number of Black or African Ameridan Ethnicity student each unit. This number will be less than ge_students in the same unit",
+    "Values": "Number of Black or African American Ethnicity student each unit. This number will be less than ge_students in the same unit",
   },
   "Ethnicity_White": {
     "DataType": "float",
@@ -35,20 +38,16 @@ units_data.columns = {
     "DataType": "float",
     "Values": "Number of Hispanic or Latinx Ethnicity student each unit. This number will be less than ge_students in the same unit",
   },
-  "all_prog_students": {
-    "DataType": "float",
-    "Values": "Total number of students (across all programs including GE, Special Education, etc) in each unit",
-  },
   "census_area": {
     "DataType": "int",
     "Values": "Census official block code number for each census unit",
   },
-  "eng_scores": {
+  "english_score": {
     "DataType": "float",
     "Values": "Sum of total English proficiency score for schools within the census unit",
     "Description": "",
   },
-  "math_scores": {
+  "math_score": {
     "DataType": "float",
     "Values": "Sum of total math score for schools within the census unit",
     "Description": "",
@@ -62,19 +61,17 @@ units_data.columns = {
     "Description": "Fraction of students at the school that met grade level standards"
   },
   "AvgColorIndex": {
-    "DataType": "float, between 1 and 5",",
+    "DataType": "float, between 1 and 5",
     "Description": "Average of ela_color, math_color, chronic_color, and suspension_color, where Red=1 and Blue=5"
   },
   "all_prog_capacity": {
     "DataType": "int",
-    "Description": "Total Number of seats in each unit. (We precomputed total number schools in each unit,
-    and summed the total number of seats across all those schools, for different program types),
+    "Description": "Total Number of seats in each unit. (We precomputed total number schools in each unit, and summed the total number of seats across all those schools, for different program types)",
   },
   "ge_capacity": {
     "DataType": "float",
-    "Values": ""Total Number of GE seats, over all the schools, in the census unit",
-    "Description": "(We precomputed total number schools in each census unit,
-     and summed the total number of GE seats across all those schools)",
+    "Values": "Total Number of GE seats, over all the schools, in the census unit",
+    "Description": "(We precomputed total number schools in each census unit, and summed the total number of GE seats across all those schools)",
   },
   "num_schools": {
     "DataType": "int",

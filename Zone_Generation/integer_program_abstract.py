@@ -317,8 +317,7 @@ class Integer_Program_Abstract(object):
     # Next, add a constraint to make sure the number of schools in each zone
     # is within average number of schools per zone + or - 1
     def _add_school_count_constraint(self):
-        zone_school_count = {}
-        avg_school_count = sum([self.schools[v] for v in range(self.U)]) / self.Z + 0.0001
+        avg_school_count = sum(self.schools) / self.Z + 0.0001
         print("avg_school_count", avg_school_count)
 
         # note: although we enforce max deviation of 1 from avg, in practice,
@@ -327,18 +326,17 @@ class Integer_Program_Abstract(object):
         # if avg_school_count is not int, and see how the inequalities will look like
         # * I implemented the code this way (instead of pairwise comparison), since it is faster
         for z in range(self.Z):
-            zone_school_count[z] = gp.quicksum([self.schools[v] * self.x[v, z] for v in self.valid_units_per_zone[z]])
-            self.m.addConstr(zone_school_count[z] <= avg_school_count + 1)
-            self.m.addConstr(zone_school_count[z] >= avg_school_count - 1)
+            zone_schools = gp.quicksum([self.schools[v] * self.x[v, z] for v in self.valid_units_per_zone[z]])
+            self.m.addConstr(zone_schools <= avg_school_count + 1)
+            self.m.addConstr(zone_schools >= avg_school_count - 1)
 
         # if K8 schools are included,
         # make sure no zone has more than one K8 schools
         if self.include_k8:
-            zone_k8_count = {}
             for z in range(self.Z):
-                zone_k8_count[z] = gp.quicksum([self.units_data["K-8"][v] * self.x[v, z]
+                zone_k8_count = gp.quicksum([self.units_data["K-8"][v] * self.x[v, z]
                                                 for v in self.valid_units_per_zone[z]])
-                self.m.addConstr(zone_k8_count[z] <= 1)
+                self.m.addConstr(zone_k8_count <= 1)
 
 
     # Enforce a balance in english score over schools of different zones as follows:
@@ -350,7 +348,7 @@ class Integer_Program_Abstract(object):
     def _add_school_eng_score_quality_constraint(self, score_dev=-1):
         if not (1 > score_dev > -1):
             return
-        eng_scores = self.units_data["english_score"].fillna(value=0)
+        eng_scores = self.units_data["english_score"]
         school_average = sum(eng_scores) / sum(self.schools)
 
         for z in range(self.Z):

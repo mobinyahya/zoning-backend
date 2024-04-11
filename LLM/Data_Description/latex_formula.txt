@@ -3,7 +3,6 @@ Existing Variables:
  - $Z$: Set of zones.
  - $U$: Set of geographic units.
  - $N$: Total number of students.
-
  - $n_u$ number of students in unit $u$.
  - $q_u$ number of seats in unit $u$.
  - $f_u$: Sum of socio-economic score of students in unit $u$.
@@ -12,6 +11,7 @@ Existing Variables:
  - $N(u)$: Neighboring units to unit $u$’s.  $\forall u \in U$.
  - $\text{centroid}(z)$: A predefined centroid for zone $z$.
  - $Sch_u$: Number of schools in unit $u$,  $\forall u \in U$
+
  - Make sure any new variable that is defined, does not have "_" in the middle of the name. For example:
     - Unacceptable: math_quality_u
     - Acceptable: MathQuality_u

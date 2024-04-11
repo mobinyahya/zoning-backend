@@ -40,7 +40,7 @@ class DesignZones:
         self.N = sum(self.units_data["ge_students"])
         self.F = sum(self.units_data["FRL"]) / (self.N)
         self.U = len(self.units_data.index)
-
+        self.zones = None
 
         self.seats = (self.units_data["ge_capacity"].astype("int64").to_numpy())
         self.schools = self.units_data['num_schools']
@@ -80,6 +80,7 @@ class DesignZones:
 
 
         self.units_data = student_stats.merge(school_stats, how='outer', on=self.level)
+        self.units_data.fillna(0, inplace=True)
 
         self._load_auxilariy_areas()
 
