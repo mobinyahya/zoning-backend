@@ -62,9 +62,9 @@ class Filter_Request(object):
             key=lambda x: int(x.split('_')[1].replace('.pkl', ''))
         )
 
+        isValid = True
         for zone_path in zone_map_paths:
             print("zone_path ", zone_path)
-            isValid = True
             with open(os.path.expanduser(input_folder + "/" + zone_path), 'rb') as file:
                 zone_dict = pickle.load(file)
                 ZE.build_zone_list(zone_dict)
@@ -75,7 +75,6 @@ class Filter_Request(object):
                 if self.solution_status["Function_Code"] != "":
                     try:
                         Function_Code = textwrap.dedent(self.solution_status["Function_Code"])
-                        print("Function_Code ", Function_Code)
                         # Change the Function_Code string into an executable function for Integer_Program class
                         local_scope = {}
                         exec(Function_Code, globals(), local_scope)
@@ -87,9 +86,17 @@ class Filter_Request(object):
                     except Exception as e:
                         print(f"An error occurred, proceeding without executing the requested function. Error: {e}")
                         self.solution_status["LLM_Request_Execution"] = False
+                        isValid = False
+                        break
                 if isValid:
                     ZV.zones_from_dict(ZE.zone_dict)
                     break
+        if isValid == False:
+            print("We couldn't meet your additional constraints, but here's a solution that fits your fixed settings from the dashboard.")
+            with open(os.path.expanduser(input_folder + "/" + zone_map_paths[0]), 'rb') as file:
+                zone_dict = pickle.load(file)
+                ZE.build_zone_list(zone_dict)
+                ZV.zones_from_dict(ZE.zone_dict)
 
 
 if __name__ == "__main__":

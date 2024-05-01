@@ -123,5 +123,5 @@ if __name__ == "__main__":
     user_inputs["request_constraint"] = ""
     RH = Generate_Request(user_inputs)
     RH.fetch_llm_response()
-    # RH.generate_aa_zones()
+    RH.generate_aa_zones()
     RH.generate_bg_zones()

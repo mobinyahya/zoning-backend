@@ -170,7 +170,7 @@ def load_bg2att(level, census_sf = None):
     if os.path.exists(os.path.expanduser(savename)):
         file = open(savename, "rb")
         bg2att = pickle.load(file)
-        print("bg to aa map was loaded from file")
+        # print("bg to aa map was loaded from file")
         return bg2att
 
     # load attendance area geometry + its id in a single dataframe

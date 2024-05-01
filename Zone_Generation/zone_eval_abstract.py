@@ -1,5 +1,3 @@
-from Zone_Generation.Config.Constants import *
-
 class Zone_Eval_Abstract(object):
     def __init__(self, Area_Data):
         # Number of zones. We are trying to divide the city into self.Z number of zones
@@ -62,7 +60,7 @@ class Zone_Eval_Abstract(object):
     # Enforce school quality balance constraint, using "AvgColorIndex" metric, which is:
     # Average of ela_color, math_color, chronic_color, and suspension_color, where Red=1 and Blue=5
     # Make sure all zones are within score_dev percerntage deviation of average of AvgColorIndex for each zone
-    def _color_quality_const(self, score_dev=-1):
+    def _color_quality_eval(self, score_dev=-1):
         if not (1 > score_dev > -1):
             return
         color_scores = self.units_data["AvgColorIndex"].fillna(value=0)
@@ -87,7 +85,7 @@ class Zone_Eval_Abstract(object):
     # by total number of schools within that zone.
     # Make sure the average english score for each zone,
     # is between (1-score_dev) * average and (1+score_dev) * average
-    def _school_eng_score_quality_const(self, score_dev=-1):
+    def _school_eng_score_quality_eval(self, score_dev=-1):
         if not (1 > score_dev > -1):
             return
         eng_scores = self.units_data["english_score"]
@@ -103,39 +101,16 @@ class Zone_Eval_Abstract(object):
                 return False
         return True
 
-    def _school_math_score_quality_const(self, score_dev=-1):
-        if not (1 > score_dev > -1):
-            return
 
-        math_score = self.units_data["math_score"].fillna(value=0)
-        school_average = sum(math_score) / sum(self.schools)
-
-        for z in range(self.Z):
-            zone_sum = sum([math_score[v] for v in self.zones[z]])
-            zone_schools = sum([self.schools[v] for v in self.zones[z]])
-            if zone_sum < (1 - score_dev) * school_average * zone_schools:
-                return False
-            if zone_sum > (1 + score_dev) * school_average * zone_schools:
-                return False
-        return True
-
-    # ---------------------------------------------------------------------------
-    # ---------------------------------------------------------------------------
-    # This following constraint makes sure all zones have almost similar number of schools.
-    # First compute the average number of schools per zone,
-    # by computing the total number of schools in the city and dividing it by the number of zones.
-    # Next, add a constraint to make sure the number of schools in each zone
-    # is within average number of schools per zone + or - 1
-    def _school_count_const(self):
+    # Constraint: Make sure all zones have almost similar number of schools with max 1 deviation.
+    def _school_count_eval(self):
+        # First compute the average number of schools per zone,
+        # by computing the total number of schools in the city and dividing it by the number of zones
         avg_school_count = sum(self.schools) / self.Z + 0.0001
 
-        # note: although we enforce max deviation of 1 from avg, in practice,
-        # no two zones will have more than 1 difference in school count
-        # Reason: school count is int. Observe the avg_school_count +-1,
-        # if avg_school_count is not int, and see how the inequalities will look like
-        # * I implemented the code this way (instead of pairwise comparison), since it is faster
         for z in range(self.Z):
             zone_schools = sum([self.schools[v] for v in self.zones[z]])
+            # Make sure the number of schools in each zone is within +/-1 of average number of schools per zone
             if zone_schools < avg_school_count - 1:
                 return False
             if zone_schools > avg_school_count + 1:
@@ -150,7 +125,9 @@ class Zone_Eval_Abstract(object):
                     return False
         return True
 
-    def _aalpi_const(self, aalpi_dev):
+    # Constraint:  Make sure all zones have similar number of racial minorities with historically underserved students.
+    # Equivalently, make sure no zone has a deviation more than aalpi_dev percentage from average.
+    def _aalpi_eval(self, aalpi_dev):
         district_average = sum(self.units_data["AALPI Score"]) / self.N
         for z in range(self.Z):
             zone_sum = sum([self.units_data["AALPI Score"][v] for v in self.zones[z]])
@@ -162,12 +139,12 @@ class Zone_Eval_Abstract(object):
                 return False
         return True
 
-    # Make sure students of low socioeconomic status groups are fairly distributed among zones.
+    # Constraint: Make sure students of low socioeconomic status groups are fairly distributed among zones.
     # Our only metric to measure socioeconomic status, is FRL, which is the students eligibility for
     # Free or Reduced Price Lunch.
     # make sure the total FRL for students in each zone, is within an additive
     #  frl_dev% of average FRL over zones..
-    def _frl_const(self, frl_dev=1):
+    def _frl_eval(self, frl_dev=1):
         for z in range(self.Z):
             zone_sum = sum([self.units_data["FRL"][u] for u in self.zones[z]])
             district_students = sum([self.studentsInArea[u] for u in self.zones[z]])
@@ -178,13 +155,10 @@ class Zone_Eval_Abstract(object):
                 return False
         return True
 
-
-
-
-    # Make sure students with ethnicities "Black or African American",  and students with ethnicities "Asian"
-    #  are fairly distributed among zones: make sure the percentage of students in each zone, is within an additive
+    # Constraint:  Make sure students with ethnicities "Black or African American",  and students with ethnicities "Asian"
+    #  are fairly distributed among zones. Make sure the percentage of students in each zone, is within an additive
     #  race_dev% of percentage of total students of that race.
-    def _racial_const(self, race_dev=1):
+    def _racial_eval(self, race_dev=1):
         ETHNICITY_COLS = ["Ethnicity_Black_or_African_American", "Ethnicity_Asian"]
         for race in ETHNICITY_COLS:
             race_ratio = sum(self.units_data[race]) / float(self.N)
@@ -197,9 +171,6 @@ class Zone_Eval_Abstract(object):
                 if zone_sum > (race_ratio + race_dev) * district_students:
                     return False
         return True
-                
-
-
     # ---------------------------------------------------------------------------
     # ---------------------------------------------------------------------------
     # All programs proportional shortage for each zone =
@@ -208,9 +179,8 @@ class Zone_Eval_Abstract(object):
     # (Total number of students, across all program types, in the zones)
     # all-program-capacities =
     # (Total number of seats for all programs (not just GE) in schools within the zone)
-    # The following constraint makes sure no zone has an All programs proportional shortage
-    # larger than the given input percentage, shorage_pct
-    def _all_cap_prop_shortage_const(self, shorage_pct):
+    # Constraint: Make sure no zone has an All programs proportional shortage more than shorage_pct
+    def _all_cap_prop_shortage_eval(self, shorage_pct):
         # No zone has shortage more than all_cap_shortage percentage of its total student population
         for z in range(self.Z):
             zone_all_cap_students = sum([self.units_data["all_prog_students"][v] for v in self.zones[z]])
@@ -222,10 +192,9 @@ class Zone_Eval_Abstract(object):
 
     # proportional shortage for each zone =
     # percentage of students (GE students) in the zone, that don't get any seat (from GE capacities)
-    # students in the zone
-    # The following constraint makes sure no zone has a shortage
-    # larger than the given input "shortage"
-    def _prop_shortage_const(self, shorage_pct):
+    # Constraint: Make sure no zone has a proportional shortage
+    # larger than "shorage_pct". (Equivalently, no zone has more than shorage_pct percentage of its students unassigned)
+    def _prop_shortage_eval(self, shorage_pct):
         # No zone has shortage more than shortage percentage of its population
         for z in range(self.Z):
             zone_students =  sum([self.studentsInArea[v] for v in self.zones[z]])
@@ -236,7 +205,11 @@ class Zone_Eval_Abstract(object):
                 return False
         return True
 
-    def _absolute_shortage_const(self, shortage_count):
+    # absolute shortage for each zone =
+    # Total number of students (GE students) in the zone, that don't get any seat (from GE capacities)
+    # Constraint: Makes sure no zone has an absolute shortage
+    # larger than "shortage_count"
+    def _absolute_shortage_eval(self, shortage_count):
         # each zone has at least the shortage
         for z in range(self.Z):
             zone_students = sum([self.studentsInArea[v] for v in self.zones[z]])
@@ -249,7 +222,7 @@ class Zone_Eval_Abstract(object):
 
     # Enforce zones to have almost the same number of students
     # Make sure the deviation in number of GE students is within dev_count of average
-    def _absolute_pop_const(self, dev_count=1000):
+    def _absolute_pop_eval(self, dev_count=1000):
         # average number of GE students in the zone
         pop_avg = sum(self.studentsInArea) / self.Z
 
@@ -260,16 +233,3 @@ class Zone_Eval_Abstract(object):
             if zone_students > pop_avg + dev_count:
                 return False
         return True
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -56,6 +56,7 @@ class DesignZones:
 
         self.euc_distances = load_euc_distance_data(self.level, self.area2idx)
 
+        print("Level: ", self.level)
         print("Average FRL ratio:       ", self.F)
         print("Number of Areas:       ", self.U)
         print("Number of GE students:       ", self.N)

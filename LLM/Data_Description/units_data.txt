@@ -11,7 +11,7 @@ units_data.columns = {
   },
   "AALPI Score": {
     "DataType": "float",
-    "Description": "Number of historically underserved student for each census unit",
+    "Description": "Number of historically underserved student for each census unit. The African American, Latinx, and Pacific Islander racial component of the HOCidx diversity measure. Higher is more historically underserved.",
     "Notes": ""
   },
   "ge_students": {

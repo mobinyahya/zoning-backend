@@ -23,8 +23,6 @@ class Schools(object):
             school_df = pd.read_csv("Zone_Generation/Zone_Data/schools_rehauled_1819.csv")
 
         school_df.rename(columns={"attendance_area": "attendance_area"}, inplace=True)
-
-        print("self.level ", self.level)
         school_df[self.level] = school_df[self.level].astype('Int64')
 
         school_df = school_df.loc[school_df["category"] != "Citywide"]

@@ -33,15 +33,16 @@ class API_Prompts(object):
         }
 
         self.output_format = json.dumps(output_format, indent=2)
-        self.example_request_function1 = """ 
+        self.example1_request_function = """ 
         Write a function in python to make sure each zone has at least 2 of the top 10 schools.
          To find top 10 schools, Sort schools by their quality, using an average color index. """
-        self.example_request_function2 = """ 
+        self.example2_request_function = """ 
         Enforce zones to have almost the same number of student.
         Make sure the population of each zone is within 17% of average population of all zones """
-
+        self.example3_request_function = """ 
+        Enforce zones to have same school quality based on math scores. Make sure this math score quality is within 24% of average"""
     def build_filteration_prompt(self, request_evaluation):
-        example_expected_output_by_claude1 = {
+        example1_expected_output = {
             'Function_Code': """
         def requested_function(self):
             color_scores = self.units_data["AvgColorIndex"]
@@ -58,14 +59,14 @@ class API_Prompts(object):
         """,
             'Latex_Formula': {
                 'Variables': {
-                    'top_schools_u': 'A binary variable indicating if unit u is among the top 10 schools based on the average color index',
+                    'TopSchools_u': 'A binary variable indicating if unit u is among the top 10 schools based on the average color index.',
                 },
-                'Formula': '\sum_{u \in U[z]} x_{u,z} \cdot top_schools_u \geq 2 \quad \forall z \in [Z]'
+                'Formula': '\sum_{u \in U} x_{u,z} \cdot topSchools_u \geq 2 \quad \forall z \in [Z]'
             }
         }
-        example_expected_output_by_claude2 = {
+        example2_expected_output = {
             'Function_Code': """
-        def _prop_pop_const(self, pop_dev=1):
+        def requested_function(self, pop_dev=1):
             average_pop = sum(self.units_data["all_prog_students"])/self.Z
     
             for z in range(self.Z):
@@ -78,7 +79,31 @@ class API_Prompts(object):
         """,
             'Latex_Formula': {
                 'Variables': {
-                    'top_schools_u': 'A binary variable indicating if unit u is among the top 10 schools based on the average color index',
+                },
+                'Formula': '(1-0.24) \cdot (\sum_{u \in U} mathScore_u) / Z \leq \sum_{u \in U} mathScore_u . x_{u,z}  \leq  (1 + 0.24) \cdot (\sum_{u \in U} mathScore_u)/Z   \quad  \forall z \in Z'
+            }
+        }
+        example3_expected_output = {
+            'Function_Code': """
+        def requested_function(self, score_dev=-1):
+            if not (1 > score_dev > -1):
+                return
+    
+            math_score = self.units_data["math_score"].fillna(value=0)
+            school_average = sum(math_score) / sum(self.schools)
+    
+            for z in range(self.Z):
+                zone_sum = sum([math_score[v] for v in self.zones[z]])
+                zone_schools = sum([self.schools[v] for v in self.zones[z]])
+                if zone_sum < (1 - score_dev) * school_average * zone_schools:
+                    return False
+                if zone_sum > (1 + score_dev) * school_average * zone_schools:
+                    return False
+            return True
+        """,
+            'Latex_Formula': {
+                'Variables': {
+                    'mathScore_u': 'Total math score of the schools in unit u. If there are no schools in unit u, the score value will be 0.',
                 },
                 'Formula': '(1-0.17) \cdot (\sum_{u \in U} n_u) / Z \leq \sum_{u \in U} n_u  x_{u,z}  \leq  (1 + 0.17) \cdot (\sum_{u \in U} n_u)/Z   \quad  \forall z \in Z'
             }
@@ -157,12 +182,14 @@ class API_Prompts(object):
         output_format: {self.output_format}
 
         Here are Example to learn from: 
-        Example 1 Desired Constraint: {self.example_request_function1}
-        Example 1 Expected output from you: {example_expected_output_by_claude1}
+        Example 1 Desired Constraint: {self.example1_request_function}
+        Example 1 Expected output from you: {example1_expected_output}
         
-        Example 2 Desired Constraint: {self.example_request_function2}
-        Example 2 Expected output from you: {example_expected_output_by_claude2}
-        
+        Example 2 Desired Constraint: {self.example2_request_function}
+        Example 2 Expected output from you: {example2_expected_output}
+                
+        Example 3 Desired Constraint: {self.example3_request_function}
+        Example 3 Expected output from you: {example3_expected_output}
         
         Make sure:
         1- Your function directly runs when appended to the existing project.
@@ -172,7 +199,7 @@ class API_Prompts(object):
         return api_prompt
 
     def build_generation_prompt(self, request_constraint):
-        example_expected_output_by_claude = {
+        example_expected_output = {
             'Function_Code': """
         def requested_function(self):
             color_scores = self.units_data["AvgColorIndex"]
@@ -191,7 +218,7 @@ class API_Prompts(object):
                 'Variables': {
                     'top_schools_u': 'A binary variable indicating if unit u is among the top 10 schools based on the average color index',
                 },
-                'Formula': '\sum_{u \in U[z]} x_{u,z} \cdot top_schools_u \geq 2 \quad \forall z \in [Z]'
+                'Formula': '\sum_{u \in U} x_{u,z} \cdot top_schools_u \geq 2 \quad \forall z \in [Z]'
             }
         }
 
@@ -271,7 +298,7 @@ class API_Prompts(object):
         output_format: {self.output_format}
 
         Here is an Example to learn from: 
-        Example Desired Constraint: {self.example_request_function1}
+        Example Desired Constraint: {self.example1_request_function}
         Example Expected output from you: {example_expected_output_by_claude}
 
         Make sure:
