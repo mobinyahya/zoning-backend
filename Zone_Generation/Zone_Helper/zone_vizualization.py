@@ -132,5 +132,5 @@ class ZoneVisualizer:
         # plt.scatter(aa['lon'],aa['lat'],s=10, c='red',marker='s')
         # plt.scatter(citywide['lon'],citywide['lat'],s=10, c='black',marker='^')
 
-        self.show_plot(save_path, title)
+        # self.show_plot(save_path, title)
 

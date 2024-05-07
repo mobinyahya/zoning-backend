@@ -121,7 +121,7 @@ if __name__ == "__main__":
     #                                   " quality across zones is within 20% deviation. Use Math"
     #                                   "Score at school level to compute school quality.")
     user_inputs["request_constraint"] = ""
-    RH = Generate_Request(user_inputs)
-    RH.fetch_llm_response()
-    RH.generate_aa_zones()
-    RH.generate_bg_zones()
+    GR = Generate_Request(user_inputs)
+    GR.fetch_llm_response()
+    GR.generate_aa_zones()
+    GR.generate_bg_zones()

@@ -1,4 +1,5 @@
 from Zone_Generation.zone_eval_abstract import Zone_Eval_Abstract
+import numpy as np
 
 
 class Zone_Eval(Zone_Eval_Abstract):
