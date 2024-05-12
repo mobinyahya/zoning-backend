@@ -74,8 +74,7 @@ class ZoneVisualizer:
         print("Finished plotting")
         return plt
 
-    def zones_from_dict(self, zone_dict, label=False, title="",
-                        centroid_location=-1, save_path=""):
+    def zones_from_dict(self, zone_dict, label=False, title="", save_path=""):
 
         # for each aa_zone (former school_id), change it with whichever zone index this gets
         # matched to based on the LP solution in zone_dict
@@ -132,5 +131,5 @@ class ZoneVisualizer:
         # plt.scatter(aa['lon'],aa['lat'],s=10, c='red',marker='s')
         # plt.scatter(citywide['lon'],citywide['lat'],s=10, c='black',marker='^')
 
-        # self.show_plot(save_path, title)
+        self.show_plot(save_path, title)
 

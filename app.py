@@ -5,8 +5,8 @@ from filter_request import Filter_Request
 import time
 
 app = Flask(__name__)
-# CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
-CORS(app)  # Global CORS configuration
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+# CORS(app)  # Global CORS configuration
 
 zone_dict = {60750102001: 0, 60750102002: 0, 60750102003: 0, 60750109003: 0, 60750110001: 0, 60750110002: 0, 60750110003: 0, 60750111001: 0, 60750126022: 0, 60750129011: 0, 60750129012: 0, 60750129021: 0, 60750129022: 0, 60750129023: 0, 60750130001: 0, 60750130002: 0, 60750130003: 0, 60750130004: 0, 60750131011: 0,
              60750131012: 0, 60750131021: 0, 60750131022: 0, 60750132001: 0, 60750132002: 0, 60750133003: 0, 60750133005: 0, 60750134001: 0, 60750134002: 0, 60750135001: 0, 60750135002: 0, 60750152001: 0, 60750152002: 0, 60750152003: 0, 60750153001: 0, 60750153002: 0, 60750154001: 0, 60750154002: 0, 60750154003: 0,
@@ -39,12 +39,14 @@ zone_dict = {60750102001: 0, 60750102002: 0, 60750102003: 0, 60750109003: 0, 607
              60750313013: 8, 60750313021: 8, 60750313022: 8, 60750313023: 8, 60750314001: 8, 60750314005: 8, 60750331001: 8, 60750331002: 8, 60750332011: 8, 60750332031: 8, 60750332032: 8, 60750332041: 8, 60750332042: 8, 60750332043: 8, 60750260031: 9, 60750260032: 9, 60750260042: 9, 60750261002: 9, 60750261003: 9,
              60750262001: 9, 60750262002: 9, 60750262003: 9, 60750262004: 9, 60750262005: 9, 60750263011: 9, 60750263012: 9, 60750263013: 9, 60750263021: 9, 60750263022: 9, 60750263023: 9, 60750263031: 9, 60750263032: 9, 60750264011: 9, 60750264012: 9, 60750264023: 9, 60750264031: 9, 60750264032: 9, 60750264041: 9,
              60750264042: 9, 60750314002: 9, 60750314003: 9, 60750314004: 9, 60750605021: 9, 60750605022: 9, 60750605023: 9, 60750610002: 9, 60759805011: 9}
-
-
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
-
+racial_dict = {
+    0: 100,
+    1: 200,
+    2: 150,
+    3: 100,
+    4: 200,
+    5: 150,
+};
 
 @app.route('/api/generate_zones_test', methods=['POST', 'OPTIONS'])
 @cross_origin(origin='http://localhost:3000')  # Specific CORS configuration for this route
@@ -106,15 +108,18 @@ def generate_zones_backend():
     response_data['zone_dict'] = zone_dict
     # print("response_data format ", response_data)
 
-    time.sleep(2)
-
+    time.sleep(1)
+    #
     FR = Filter_Request(user_inputs)
     FR.fetch_llm_response()
     FR.filter_zones()
+    FR.solution_status["racial_dict"] = racial_dict
+    # print("\n FR.solution_status: ",  FR.solution_status)
 
-    print("\n FR.solution_status: ",  FR.solution_status)
-    if "Latex_Formula" in FR.solution_status:
-        print("\n FR.solution_status[Latex_Formula]: ",  FR.solution_status["Latex_Formula"])
+
+
+    # if "Latex_Formula" in FR.solution_status:
+    #     print("\n FR.solution_status[Latex_Formula]: ",  FR.solution_status["Latex_Formula"])
     # print("\n FR.solution_status[zone_dict]: ", FR.solution_status["zone_dict"])
 
 
@@ -124,8 +129,8 @@ def generate_zones_backend():
     # # Replace double backslashes with single backslashes in the string representation
     # dict_str = dict_str.replace("\\\\", "\\")
 
-    # return jsonify(FR.solution_status)
-    return jsonify(response_data)
+    return jsonify(FR.solution_status)
+    # return jsonify(response_data)
     # return send_file('Figures/zone_partition.png', mimetype='image/png')
 
 

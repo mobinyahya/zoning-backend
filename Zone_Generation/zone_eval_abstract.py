@@ -65,9 +65,7 @@ class Zone_Eval_Abstract(object):
     # Enforce school quality balance constraint, using "AvgColorIndex" metric, which is:
     # Average of ela_color, math_color, chronic_color, and suspension_color, where Red=1 and Blue=5
     # Make sure all zones are within score_dev percerntage deviation of average of AvgColorIndex for each zone
-    def _color_quality_eval(self, score_dev=-1):
-        if not (1 > score_dev > -1):
-            return
+    def _color_quality_eval(self, score_dev):
         color_scores = self.units_data["AvgColorIndex"].fillna(value=0)
         school_average = sum(color_scores) / sum(self.schools)
 
@@ -90,9 +88,7 @@ class Zone_Eval_Abstract(object):
     # by total number of schools within that zone.
     # Make sure the average english score for each zone,
     # is between (1-score_dev) * average and (1+score_dev) * average
-    def _school_eng_score_quality_eval(self, score_dev=-1):
-        if not (1 > score_dev > -1):
-            return
+    def _school_eng_score_quality_eval(self, score_dev):
         eng_scores = self.units_data["english_score"]
         school_average = sum(eng_scores) / sum(self.schools)
 
