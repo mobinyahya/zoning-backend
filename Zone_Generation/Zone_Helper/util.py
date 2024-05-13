@@ -2,8 +2,8 @@ import os, csv
 import pickle
 import numpy as np
 import pandas as pd
-import geopandas as gpd
-from shapely.geometry import Point
+# import geopandas as gpd
+# from shapely.geometry import Point
 
 
 def Compute_Name(config):
@@ -50,25 +50,30 @@ def calculate_euc_distance(lat1, lon1, lat2, lon2):
 
 
 def load_census_shapefile(level):
-    # get census block shapefile
-    path = os.path.expanduser(
-        "Zone_Generation/Zone_Data/GEO_EXPORT/geo_export_d4e9e90c-ff77-4dc9-a766-6a1a7f7d9f9c.shp"
-    )
-    census_sf = gpd.read_file(path)
-    census_sf["Block"] = (
-        census_sf["geoid10"].fillna(value=0).astype("int64", copy=False)
-    )
+    # # get census block shapefile
+    # path = os.path.expanduser(
+    #     "Zone_Generation/Zone_Data/GEO_EXPORT/geo_export_d4e9e90c-ff77-4dc9-a766-6a1a7f7d9f9c.shp"
+    # )
+    # census_sf = gpd.read_file(path)
+    # census_sf["Block"] = (
+    #     census_sf["geoid10"].fillna(value=0).astype("int64", copy=False)
+    # )
+    #
+    # df = pd.read_csv("Zone_Generation/Zone_Data/block_blockgroup_tract.csv")
+    # df["Block"].fillna(value=0, inplace=True)
+    # df["Block"] = df["Block"].astype("int64")
+    #
+    # census_sf = census_sf.merge(df, how="left", on="Block")
+    #
+    # census_sf.dropna(subset=['BlockGroup', 'Block'], inplace=True)
+    # census_sf[level] = census_sf[level].astype('int64')
+    #
+    # census_sf = census_sf[["Block", "BlockGroup"]]
+    # census_sf.to_csv('census_sf.csv', index=False)
+    # print("census_sf ", census_sf)
+    loaded_df = pd.read_csv('Zone_Generation/Zone_Data/census_sf.csv')
 
-    df = pd.read_csv("Zone_Generation/Zone_Data/block_blockgroup_tract.csv")
-    df["Block"].fillna(value=0, inplace=True)
-    df["Block"] = df["Block"].astype("int64")
-
-    census_sf = census_sf.merge(df, how="left", on="Block")
-
-    census_sf.dropna(subset=['BlockGroup', 'Block'], inplace=True)
-    census_sf[level] = census_sf[level].astype('int64')
-
-    return census_sf
+    return loaded_df
 
 def load_euc_distance_data(level, area2idx, complete_bg = False):
     if level == "attendance_area":

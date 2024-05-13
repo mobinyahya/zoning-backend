@@ -4,6 +4,8 @@ import csv
 import types
 sys.path.append("Zone_Generation/")
 from Config.Constants import *
+import pandas as pd
+
 from Zone_Helper.util import *
 # from Zone_Helper.zone_vizualization import ZoneVisualizer
 # from integer_program import Integer_Program
@@ -84,8 +86,8 @@ class DesignZones:
         self._load_auxilariy_areas()
 
         self.units_data.fillna(value=0, inplace=True)
-        if self.level == "BlockGroup":
-            self.bg2att = load_bg2att(self.level)
+        # if self.level == "BlockGroup":
+        #     self.bg2att = load_bg2att(self.level)
 
 
 

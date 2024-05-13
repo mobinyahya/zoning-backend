@@ -9,7 +9,6 @@ fiona==1.9.6
 Flask==2.2.5
 Flask-Cors==4.0.0
 fonttools==4.38.0
-geopandas==0.10.2
 gunicorn==21.2.0
 idna==3.7
 importlib-metadata==6.7.0
@@ -29,7 +28,6 @@ requests==2.31.0
 Rtree==1.0.1
 shapely==2.0.3
 six==1.16.0
-rtree==1.0.1
 typing_extensions==4.7.1
 urllib3==2.2.1
 Werkzeug==2.2.3
