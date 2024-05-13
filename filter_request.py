@@ -1,15 +1,14 @@
 import yaml, ast, json, pickle
 import types, textwrap
-import re
+import re, os
 import numpy as np
 import pandas as pd
 import textwrap, types, pandas
-import gurobipy as gp
 from Zone_Generation.design_zones import DesignZones
 from Zone_Generation.zone_eval import Zone_Eval
-from Zone_Generation.Zone_Helper.zone_vizualization import *
+# from Zone_Generation.Zone_Helper.zone_vizualization import *
 from Zone_Generation.Zone_Helper.util import Compute_Name
-from Zone_Generation.Zone_Helper.local_search import *
+# from Zone_Generation.Zone_Helper.local_search import *
 from Zone_Generation.Config.Constants import *
 from LLM.api_calls import make_api_call
 
@@ -55,7 +54,6 @@ class Filter_Request(object):
             llm_response = llm_response.strip()
             # response_json = json.loads(llm_response)
             response_json = ast.literal_eval(llm_response)
-            print("XXX")
 
             latex_formula = repr(response_json["Latex_Formula"]['Formula'])
             latex_formula = latex_formula.replace('\\x0c', '\\\\f')
@@ -140,7 +138,8 @@ class Filter_Request(object):
         return False
     def filter_zones(self):
         DZ = DesignZones(config=self.config)
-        ZV = ZoneVisualizer(self.config["level"])
+        # ZV = ZoneVisualizer(self.config["level"])
+        ZV = {}
         ZE = Zone_Eval(DZ)
 
 

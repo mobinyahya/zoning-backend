@@ -2,15 +2,13 @@ import sys
 import yaml
 import csv
 import types
-import gurobipy as gp
-
 sys.path.append("Zone_Generation/")
 from Config.Constants import *
 from Zone_Helper.util import *
-from Zone_Helper.zone_vizualization import ZoneVisualizer
+# from Zone_Helper.zone_vizualization import ZoneVisualizer
+# from integer_program import Integer_Program
 from schools import Schools
 from students import Students
-from integer_program import Integer_Program
 
 
 class DesignZones:
