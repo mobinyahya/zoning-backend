@@ -1,7 +1,7 @@
 from flask import Flask, send_file, jsonify, request
 from flask_cors import CORS, cross_origin
 from Zone_Generation.Config.Constants import *
-from filter_request import Filter_Request
+# from filter_request import Filter_Request
 import time
 
 app = Flask(__name__)

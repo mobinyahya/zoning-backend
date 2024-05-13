@@ -29,6 +29,7 @@ requests==2.31.0
 Rtree==1.0.1
 shapely==2.0.3
 six==1.16.0
+rtree==1.0.1
 typing_extensions==4.7.1
 urllib3==2.2.1
 Werkzeug==2.2.3
