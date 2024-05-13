@@ -5,3 +5,4 @@ flask run # runs the flask on local device to build the local host http://127.0.
 git push heroku main #push everything on heroku and run it on the server
 python requests_handler.py # to run the zone assignments
 pip freeze > requirements.txt #to add all the installed libraries into the requirements file, for server to download them as well
+python
