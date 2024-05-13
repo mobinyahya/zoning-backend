@@ -1,7 +1,7 @@
 from flask import Flask, send_file, jsonify, request
 from flask_cors import CORS, cross_origin
 from Zone_Generation.Config.Constants import *
-from filter_request import Filter_Request
+# from filter_request import Filter_Request
 import time
 
 app = Flask(__name__)
@@ -116,31 +116,35 @@ def generate_zones_backend():
     response_data = {}
     response_data['Latex_Formula'] = Latex_Formula
     response_data['zone_dict'] = zone_dict
-    # print("response_data format ", response_data)
+    # print("respose_data format ", response_data)
 
-    time.sleep(1)
+    # time.sleep(1)
+
+
     #
-    FR = Filter_Request(user_inputs)
-    FR.fetch_llm_response()
-    FR.filter_zones()
-    # print("\n FR.solution_status: ",  FR.solution_status)
+    # FR = Filter_Request(user_inputs)
+    # FR.fetch_llm_response()
+    # FR.filter_zones()
+    # # print("\n FR.solution_status: ",  FR.solution_status)
+    #
+    #
+    # for key in  FR.solution_status:
+    #     print(key)
+    # if "Latex_Formula" in FR.solution_status:
+    #     print("\n FR.solution_status[Latex_Formula]: ",  FR.solution_status["Latex_Formula"])
+    # # print("\n FR.solution_status[zone_dict]: ", FR.solution_status["zone_dict"])
+    #
+    #
+    #
+    # # Convert the dictionary to a string representation
+    # # dict_str = str(FR.solution_status["Latex_Formula"]) use json.dumps() instead
+    # # # Replace double backslashes with single backslashes in the string representation
+    # # dict_str = dict_str.replace("\\\\", "\\")
+    #
+    # return jsonify(FR.solution_status)
+    return jsonify(response_data)
 
 
-    for key in  FR.solution_status:
-        print(key)
-    if "Latex_Formula" in FR.solution_status:
-        print("\n FR.solution_status[Latex_Formula]: ",  FR.solution_status["Latex_Formula"])
-    # print("\n FR.solution_status[zone_dict]: ", FR.solution_status["zone_dict"])
-
-
-
-    # Convert the dictionary to a string representation
-    # dict_str = str(FR.solution_status["Latex_Formula"]) use json.dumps() instead
-    # # Replace double backslashes with single backslashes in the string representation
-    # dict_str = dict_str.replace("\\\\", "\\")
-
-    return jsonify(FR.solution_status)
-    # return jsonify(response_data)
     # return send_file('Figures/zone_partition.png', mimetype='image/png')
 
 
