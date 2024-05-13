@@ -91,3 +91,12 @@ class Zone_Eval(Zone_Eval_Abstract):
                 if self.euc_distances[self.centroids[z]][u] > max_distance:
                     return False
         return True
+
+    def compute_racial_pcnt(self):
+        racial_diversity_pcnt = {}
+
+        for z in range(self.Z):
+            zone_sum = sum([self.units_data["FRL"][u] for u in self.zones[z]])
+            district_students = sum([self.studentsInArea[u] for u in  self.zones[z]])
+            racial_diversity_pcnt[z] = round(100 * zone_sum / district_students, 2)
+        return racial_diversity_pcnt

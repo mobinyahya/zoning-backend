@@ -45,7 +45,7 @@ class API_Prompts(object):
         Enforce zones to have same school quality based on math scores. Make sure this math score quality is within 24% of average"""
 
         example1_expected_output = {
-            'Function_Code': """
+            'Function_Code': '''
         def requested_function(self):
             color_scores = self.units_data["AvgColorIndex"]
             top_schools = np.zeros([self.U])
@@ -59,7 +59,7 @@ class API_Prompts(object):
                if topz < 2:
                    return False
             return True
-        """,
+        ''',
             'Latex_Formula': {
                 'Variables': {
                     'TopSchools_u': 'A binary variable indicating if unit u is among the top 10 schools based on the average color index.',
@@ -68,7 +68,7 @@ class API_Prompts(object):
             }
         }
         example2_expected_output = {
-            'Function_Code': """
+            'Function_Code': '''
         def requested_function(self, pop_dev=1):
             average_pop = sum(self.units_data["all_prog_students"])/self.Z
     
@@ -79,7 +79,7 @@ class API_Prompts(object):
                 if zone_all_cap_students <= (1 + pop_dev) * average_pop:
                     return False
             return True
-        """,
+        ''',
             'Latex_Formula': {
                 'Variables': {
                 },
@@ -87,7 +87,7 @@ class API_Prompts(object):
             }
         }
         example3_expected_output = {
-            'Function_Code': """
+            'Function_Code': '''
         def requested_function(self, score_dev=-1):
             math_score = self.units_data["math_score"]
             total_school_count = sum(self.schools)
@@ -101,7 +101,7 @@ class API_Prompts(object):
                 if zone_sum > (1 + score_dev) * school_average * zone_schools:
                     return False
             return True
-        """,
+        ''',
             'Latex_Formula': {
                 'Variables': {
                     'mathScore_u': 'Total math score of the schools in unit u. If there are no schools in unit u, the score value will be 0.',
@@ -179,7 +179,8 @@ class API_Prompts(object):
 
 
 
-        Your output should have the exact following json format, with no additional text besides outside of this format:
+        Your output should have the exact following json format, with no additional text besides outside of this format.
+        Make sure your dictionary values are within a three consequitive single quotations (''')
         output_format: {self.output_format}
 
         Here are Example to learn from: 

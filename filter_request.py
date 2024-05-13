@@ -38,27 +38,31 @@ class Filter_Request(object):
 
         if self.config["request_constraint"] == "":
             return
-        #
-        # llm_response = make_api_call(self.config["request_constraint"])
-        # with open('LLM/llm_filteration_response_5_06_1.txt', 'w') as file:
-        #     file.write(llm_response)
-
-
-        with open('LLM/llm_filteration_response_5_06_1.txt', 'r') as file:
-        # with open('LLM/llm_filteration_response_5_05.txt', 'r') as file:
-        # with open('LLM/llm_filteration_response_5_06.txt', 'r') as file:
-        # with open('LLM/llm_filteration_response.txt', 'r') as file:
-            llm_response = file.read()
-
 
         try:
-            # llm_response = self.response_string_cleaning(llm_response)
+            # llm_response = make_api_call(self.config["request_constraint"])
+            # with open('LLM/llm_filteration_response_5_12_3.txt', 'w') as file:
+            #     file.write(llm_response)
+
+
+            # with open('LLM/llm_filteration_response_5_06_1.txt', 'r') as file:
+            # with open('LLM/llm_filteration_response_5_05.txt', 'r') as file:
+            # with open('LLM/llm_filteration_response_5_06.txt', 'r') as file:
+            with open('LLM/llm_filteration_response_5_12_2.txt', 'r') as file:
+                llm_response = file.read()
+
+            llm_response = self.response_string_cleaning(llm_response)
+            llm_response = llm_response.strip()
+            # response_json = json.loads(llm_response)
             response_json = ast.literal_eval(llm_response)
+            print("XXX")
+
             latex_formula = repr(response_json["Latex_Formula"]['Formula'])
             latex_formula = latex_formula.replace('\\x0c', '\\\\f')
 
             # Remove the extra quotes added by repr()
             latex_formula = latex_formula[1:-1]
+            # Replacing \forall with ∀ character (weird handling of "\forall" in the frontend)
             latex_formula = re.sub('\\\\\\\\forall', '∀', latex_formula)
             latex_formula = latex_formula.replace('\\\\', '\\')
 
@@ -74,14 +78,7 @@ class Filter_Request(object):
             # self.solution_status["Latex_Formula"]["Formula"] = latex_formula
             # print("self.solution_status[Latex_Formula][Formula]", self.solution_status["Latex_Formula"]["Formula"])
             # print("response_json[Latex_Formula][Formula]", response_json["Latex_Formula"]["Formula"])
-            # exit()
 
-            # TODO replace // with / before returning the latex
-            # TODO replace \forall with ∀ character (weird handling of that in the frontend)
-            # TODO check if the structure of the Latex Formula is exactly as expected. (because otherwise we'll run into error on the frontend)
-
-            # divided_string = llm_response.split('"')
-            # self.solution_status["Function_Code"] = divided_string[3]
 
         except Exception as e:
             print(f"LLM Response has invalid format: {e}")
@@ -89,11 +86,6 @@ class Filter_Request(object):
             self.solution_status["Latex_Formula"]["Variables"] = {}
             self.solution_status["Latex_Formula"]["Formula"] = "Parsing_Failed"
             self.solution_status["LLM_Request_Execution"] = "Unfulfilled"
-    def compute_racial_dict(self):
-        racial_diversity_dict = {}
-        self.solution_status["zone_dict"]
-        self.solution_status["racial_dict"] = racial_diversity_dict
-        return
 
     def update_config(self, user_inputs):
         with open("Zone_Generation/Config/config.yaml", "r") as f:
@@ -166,11 +158,14 @@ class Filter_Request(object):
             if self.solution_status["LLM_Request_Execution"] != "Fulfilled":
                 print("We couldn't meet your additional constraints, but here's a solution that fits your fixed settings from the dashboard.")
                 self.load_zoning_without_llm_function(input_folder, zone_map_paths, ZE, ZV)
-        self.compute_racial_dict(DZ)
+
+        ZE.build_zone_list(self.solution_status["zone_dict"])
+        self.solution_status["racial_dict"] = ZE.compute_racial_pcnt()
+
 
 if __name__ == "__main__":
     user_inputs = {}
-    user_inputs["FRL_Dev"] = 2
+    user_inputs["FRL_Dev"] = 20
     user_inputs["number_of_zones"] = 6
     # user_inputs["request_constraint"] = ("Write a function in python to make sure the average school"
     #                                   " quality across zones is within 20% deviation. Use Math"

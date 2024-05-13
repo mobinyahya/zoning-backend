@@ -113,13 +113,13 @@ def generate_zones_backend():
     FR = Filter_Request(user_inputs)
     FR.fetch_llm_response()
     FR.filter_zones()
-    FR.solution_status["racial_dict"] = racial_dict
     # print("\n FR.solution_status: ",  FR.solution_status)
 
 
-
-    # if "Latex_Formula" in FR.solution_status:
-    #     print("\n FR.solution_status[Latex_Formula]: ",  FR.solution_status["Latex_Formula"])
+    for key in  FR.solution_status:
+        print(key)
+    if "Latex_Formula" in FR.solution_status:
+        print("\n FR.solution_status[Latex_Formula]: ",  FR.solution_status["Latex_Formula"])
     # print("\n FR.solution_status[zone_dict]: ", FR.solution_status["zone_dict"])
 
 
