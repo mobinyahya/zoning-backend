@@ -1,0 +1,25 @@
+Here is the output in the requested json format:
+
+{
+  "Function_Code": '''
+    def requested_function(self, score_dev=0.2):
+        math_score = self.units_data["math_score"] 
+        total_math_score = sum(math_score)
+        
+        for z in range(self.Z):
+            zone_math_score = sum([math_score[u] for u in self.zones[z]])
+            zone_students = sum([self.studentsInArea[u] for u in self.zones[z]])
+            
+            if zone_math_score < (1 - score_dev) * (zone_students/self.N) * total_math_score:
+                return False
+            if zone_math_score > (1 + score_dev) * (zone_students/self.N) * total_math_score:  
+                return False
+        return True
+    ''',
+  "Latex_Formula": {
+    "Variables": {
+      "MathScore_u": "Sum of math scores for schools in unit $u$. If there are no schools in unit $u$, the score value will be 0."
+    },
+    "Formula": "(1-0.2) \\cdot \\frac{\\sum_{u \\in U} MathScore_u \\cdot n_u}{\\sum_{u \\in U} n_u} \\cdot \\sum_{u \\in U} n_u \\cdot x_{u,z}  \\leq \\sum_{u \\in U} MathScore_u \\cdot x_{u,z}  \\leq  (1 + 0.2) \\cdot \\frac{\\sum_{u \\in U} MathScore_u \\cdot n_u}{\\sum_{u \\in U} n_u} \\cdot \\sum_{u \\in U} n_u \\cdot x_{u,z}   \\quad  \\forall z \\in Z"
+  }
+}
