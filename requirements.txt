@@ -10,7 +10,7 @@ Flask-Cors==4.0.0
 fonttools==4.38.0
 geopandas==0.10.2
 gunicorn==21.2.0
-gurobipy==10.0.3
+gurobipy==11.0.1
 importlib-metadata==6.7.0
 itsdangerous==2.1.2
 Jinja2==3.1.3
