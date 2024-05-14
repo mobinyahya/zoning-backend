@@ -39,16 +39,16 @@ class Filter_Request(object):
             return
 
         try:
-            llm_response = make_api_call(self.config["request_constraint"])
-            with open('LLM/llm_filteration_response_5_13_1.txt', 'w') as file:
-                file.write(llm_response)
+            # llm_response = make_api_call(self.config["request_constraint"])
+            # with open('LLM/llm_filteration_response_5_13_1.txt', 'w') as file:
+            #     file.write(llm_response)
 
 
             # with open('LLM/llm_filteration_response_5_06_1.txt', 'r') as file:
             # with open('LLM/llm_filteration_response_5_05.txt', 'r') as file:
             # with open('LLM/llm_filteration_response_5_06.txt', 'r') as file:
-            # with open('LLM/llm_filteration_response_5_12_2.txt', 'r') as file:
-            #     llm_response = file.read()
+            with open('LLM/llm_filteration_response_5_12_2.txt', 'r') as file:
+                llm_response = file.read()
 
             llm_response = self.response_string_cleaning(llm_response)
             llm_response = llm_response.strip()
@@ -64,8 +64,8 @@ class Filter_Request(object):
             latex_formula = re.sub('\\\\\\\\forall', '∀', latex_formula)
             latex_formula = latex_formula.replace('\\\\', '\\')
 
-            print("latex_formula", latex_formula)
-            print("response_json ", response_json)
+            # print("latex_formula", latex_formula)
+            # print("response_json ", response_json)
 
             self.solution_status["Function_Code"] = response_json["Function_Code"]
             self.solution_status["Latex_Formula"] = {}
