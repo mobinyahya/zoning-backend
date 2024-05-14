@@ -95,8 +95,6 @@ def generate_zones_test3():
 @cross_origin(origin='http://localhost:3000')  # Specific CORS configuration for this route
 def generate_zones_backend():
     data = request.get_json()
-    print("generate_zones data", data)
-
 
     user_inputs = {}
     user_inputs["number_of_zones"] = Choice2Zones[data['choices_per_zone']]
@@ -116,37 +114,19 @@ def generate_zones_backend():
     response_data = {}
     response_data['Latex_Formula'] = Latex_Formula
     response_data['zone_dict'] = zone_dict
-    # print("respose_data format ", response_data)
-
-    # time.sleep(1)
-
-
 
     FR = Filter_Request(user_inputs)
     FR.fetch_llm_response()
     FR.filter_zones()
-    # print("\n FR.solution_status: ",  FR.solution_status)
 
-
-    for key in  FR.solution_status:
-        print(key)
+    print(FR.solution_status.keys())
     if "Latex_Formula" in FR.solution_status:
         print("\n FR.solution_status[Latex_Formula]: ",  FR.solution_status["Latex_Formula"])
     # print("\n FR.solution_status[zone_dict]: ", FR.solution_status["zone_dict"])
 
 
-
-    # Convert the dictionary to a string representation
-    # dict_str = str(FR.solution_status["Latex_Formula"]) use json.dumps() instead
-    # # Replace double backslashes with single backslashes in the string representation
-    # dict_str = dict_str.replace("\\\\", "\\")
-
     return jsonify(FR.solution_status)
     # return jsonify(response_data)
-
-
-    # return send_file('Figures/zone_partition.png', mimetype='image/png')
-
 
 
 if __name__ == '__main__':

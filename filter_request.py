@@ -6,12 +6,11 @@ import pandas as pd
 import textwrap, types, pandas
 from Zone_Generation.design_zones import DesignZones
 from Zone_Generation.zone_eval import Zone_Eval
-# from Zone_Generation.Zone_Helper.zone_vizualization import *
 from Zone_Generation.Zone_Helper.util import Compute_Name
-# from Zone_Generation.Zone_Helper.local_search import *
 from Zone_Generation.Config.Constants import *
-# from LLM.api_calls import make_api_call
-
+from LLM.api_calls import make_api_call
+# from Zone_Generation.Zone_Helper.zone_vizualization import *
+# from Zone_Generation.Zone_Helper.local_search import *
 
 class Filter_Request(object):
     def __init__(self, user_inputs):
@@ -40,7 +39,7 @@ class Filter_Request(object):
 
         try:
             # llm_response = make_api_call(self.config["request_constraint"])
-            # with open('LLM/llm_filteration_response_5_12_3.txt', 'w') as file:
+            # with open('LLM/llm_filteration_response_5_13_1.txt', 'w') as file:
             #     file.write(llm_response)
 
 
@@ -171,6 +170,7 @@ if __name__ == "__main__":
     #                                   "Score at school level to compute school quality.")
     user_inputs["request_constraint"] = ("Make sure each zone has one of the top 10 schools in SF. "
                                          "Use 'Met' standard ranking as a quality metric to find the top school.")
+    user_inputs["request_constraint"] = "some good balance constraints"
     FR = Filter_Request(user_inputs)
     FR.fetch_llm_response()
     FR.filter_zones()

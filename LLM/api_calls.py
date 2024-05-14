@@ -1,6 +1,15 @@
 import requests
-import json
-from LLM.config import ANTHROPIC_API_KEY
+import json, os
+from dotenv import load_dotenv
+
+
+
+# Load environment variables from .env file
+load_dotenv()
+# Access the API key from the environment variable
+ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY')
+# from LLM.config import ANTHROPIC_API_KEY
+
 
 class API_Prompts(object):
     def __init__(self):
