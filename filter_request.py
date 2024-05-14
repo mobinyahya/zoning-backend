@@ -8,7 +8,8 @@ from Zone_Generation.design_zones import DesignZones
 from Zone_Generation.zone_eval import Zone_Eval
 from Zone_Generation.Zone_Helper.util import Compute_Name
 from Zone_Generation.Config.Constants import *
-# from LLM.api_calls import make_api_call
+from LLM.api_calls import make_api_call
+
 # from Zone_Generation.Zone_Helper.zone_vizualization import *
 # from Zone_Generation.Zone_Helper.local_search import *
 
