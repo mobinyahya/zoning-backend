@@ -7,7 +7,8 @@ import time
 app = Flask(__name__)
 # CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 # CORS(app, resources={r"/api/*": {"origins": ["https://liftoff-aeg7jva44-mobinyahyas-projects.vercel.app", "http://localhost:3000"]}})
-CORS(app, resources={r"/api/*": {"origins": ["https://*.vercel.app", "http://localhost:3000"]}})
+CORS(app, resources={r"/api/*": {"origins": ["https://liftoff-five-zeta.vercel.app", "http://localhost:3000"]}})
+# CORS(app, resources={r"/api/*": {"origins": ["https://*.vercel.app", "http://localhost:3000"]}})
 
 
 
@@ -53,7 +54,8 @@ def generate_zones_test():
 @app.route('/api/generate_zones', methods=['POST', 'OPTIONS'])
 # @cross_origin(origin='http://localhost:3000')  # Specific CORS configuration for this route
 # @cross_origin(origins=['https://liftoff-aeg7jva44-mobinyahyas-projects.vercel.app', 'http://localhost:3000'])
-@cross_origin(origins=['https://*.vercel.app', 'http://localhost:3000'])
+@cross_origin(origins=['https://liftoff-five-zeta.vercel.app', 'http://localhost:3000'])
+# @cross_origin(origins=['https://*.vercel.app', 'http://localhost:3000'])
 
 
 def generate_zones_backend():
