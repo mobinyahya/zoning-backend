@@ -39,16 +39,16 @@ class Filter_Request(object):
             return
 
         try:
-            # llm_response = make_api_call(self.config["request_constraint"])
-            # with open('LLM/llm_filteration_response_5_13_1.txt', 'w') as file:
-            #     file.write(llm_response)
+            llm_response = make_api_call(self.config["request_constraint"])
+            with open('LLM/llm_filteration_response_5_15_1.txt', 'w') as file:
+                file.write(llm_response)
 
 
             # with open('LLM/llm_filteration_response_5_06_1.txt', 'r') as file:
             # with open('LLM/llm_filteration_response_5_05.txt', 'r') as file:
             # with open('LLM/llm_filteration_response_5_06.txt', 'r') as file:
-            with open('LLM/llm_filteration_response_5_12_2.txt', 'r') as file:
-                llm_response = file.read()
+            # with open('LLM/llm_filteration_response_5_12_2.txt', 'r') as file:
+            #     llm_response = file.read()
 
             llm_response = self.response_string_cleaning(llm_response)
             llm_response = llm_response.strip()
@@ -83,7 +83,7 @@ class Filter_Request(object):
             self.solution_status["Latex_Formula"] = {}
             self.solution_status["Latex_Formula"]["Variables"] = {}
             self.solution_status["Latex_Formula"]["Formula"] = "Parsing_Failed"
-            self.solution_status["LLM_Request_Execution"] = "Unfulfilled"
+            self.solution_status["LLM_Request_Execution"] = "Unable_To_Run"
 
     def update_config(self, user_inputs):
         with open("Zone_Generation/Config/config.yaml", "r") as f:
@@ -103,7 +103,6 @@ class Filter_Request(object):
 
     def load_zoning_with_llm_function(self, input_folder, zone_map_paths, ZE, ZV):
         for zone_path in zone_map_paths:
-            self.solution_status["LLM_Request_Execution"] = "Unfulfilled"
             with open(os.path.expanduser(input_folder + "/" + zone_path), 'rb') as file:
                 print("File: ", os.path.expanduser(input_folder + "/" + zone_path))
                 zone_dict = pickle.load(file)
@@ -127,7 +126,7 @@ class Filter_Request(object):
                     llm_fulfilled = ZE.requested_function()
                 except Exception as e:
                     llm_fulfilled = False
-                    self.solution_status["LLM_Request_Execution"] = "Unable to Run"
+                    self.solution_status["LLM_Request_Execution"] = "Unable_To_Run"
                     print(f"An error occurred, proceeding without executing the requested function. Error: {e}")
                     break
                 if llm_fulfilled:
@@ -135,6 +134,7 @@ class Filter_Request(object):
                     self.solution_status["LLM_Request_Execution"] = "Fulfilled"
                     # ZV.zones_from_dict(ZE.zone_dict)
                     return
+        self.solution_status["LLM_Request_Execution"] = "Too_Restrictive"
         return False
     def filter_zones(self):
         DZ = DesignZones(config=self.config)

@@ -80,6 +80,7 @@ def generate_zones_backend():
     print(FR.solution_status.keys())
     if "Latex_Formula" in FR.solution_status:
         print("\n FR.solution_status[Latex_Formula]: ",  FR.solution_status["Latex_Formula"])
+    print("LLM_Request_Execution ", FR.solution_status["LLM_Request_Execution"])
     # print("\n FR.solution_status[zone_dict]: ", FR.solution_status["zone_dict"])
 
 
