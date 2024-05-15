@@ -8,7 +8,6 @@ app = Flask(__name__)
 # CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 # CORS(app, resources={r"/api/*": {"origins": ["https://liftoff-aeg7jva44-mobinyahyas-projects.vercel.app", "http://localhost:3000"]}})
 CORS(app, resources={r"/api/*": {"origins": ["https://liftoff-five-zeta.vercel.app", "http://localhost:3000"]}})
-# CORS(app, resources={r"/api/*": {"origins": ["https://*.vercel.app", "http://localhost:3000"]}})
 
 
 
@@ -55,7 +54,6 @@ def generate_zones_test():
 # @cross_origin(origin='http://localhost:3000')  # Specific CORS configuration for this route
 # @cross_origin(origins=['https://liftoff-aeg7jva44-mobinyahyas-projects.vercel.app', 'http://localhost:3000'])
 @cross_origin(origins=['https://liftoff-five-zeta.vercel.app', 'http://localhost:3000'])
-# @cross_origin(origins=['https://*.vercel.app', 'http://localhost:3000'])
 
 
 def generate_zones_backend():
@@ -88,7 +86,8 @@ def generate_zones_backend():
     print(FR.solution_status.keys())
     if "Latex_Formula" in FR.solution_status:
         print("\n FR.solution_status[Latex_Formula]: ",  FR.solution_status["Latex_Formula"])
-    print("LLM_Request_Execution ", FR.solution_status["LLM_Request_Execution"])
+    if "LLM_Request_Execution" in FR.solution_status:
+        print("LLM_Request_Execution ", FR.solution_status["LLM_Request_Execution"])
     # print("\n FR.solution_status[zone_dict]: ", FR.solution_status["zone_dict"])
 
 
