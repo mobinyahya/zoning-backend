@@ -60,7 +60,7 @@ def generate_zones_backend():
     data = request.get_json()
 
     user_inputs = {}
-    user_inputs["number_of_zones"] = Choice2Zones[data['choices_per_zone']]
+    user_inputs["number_of_zones"] = data['number_of_zones']
     user_inputs["FRL_Dev"] = data['FRL_Dev']
     user_inputs["request_constraint"] = data['request_constraint']
 
