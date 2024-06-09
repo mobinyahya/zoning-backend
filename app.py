@@ -5,7 +5,7 @@ from filter_request import Filter_Request
 import time
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": ["https://zone-optimizer.vercel.app/", "http://localhost:3000"]}})
+CORS(app, resources={r"/api/*": {"origins": ["https://zone-optimizer.vercel.app", "http://localhost:3000"]}})
 
 
 @app.route('/')
@@ -30,8 +30,6 @@ def generate_zones_test():
 
 
 
-
-
 # expected inputs:
     # data json, with data['FRLDeviation'], data['Number_of_Zones'], data['Number_of_Zones']
 # expected outputs:
@@ -47,7 +45,7 @@ def generate_zones_test():
 #         }
 @app.route('/api/generate_zones', methods=['POST', 'OPTIONS'])
 # @cross_origin(origin='http://localhost:3000')  # Specific CORS configuration for this route
-@cross_origin(origins=['https://zone-optimizer.vercel.app/', 'http://localhost:3000'])
+@cross_origin(origins=['https://zone-optimizer.vercel.app', 'http://localhost:3000'])
 
 
 def generate_zones_backend():
